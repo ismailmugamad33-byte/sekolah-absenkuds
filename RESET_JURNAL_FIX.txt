@@ -1,0 +1,7 @@
+CATATAN FITUR RESET — BUKAN LANGKAH PEMBARUAN
+
+Reset Seluruh Data adalah fitur lama Admin untuk menghapus absensi siswa,
+kehadiran guru, jurnal, dan seluruh sesi login dengan konfirmasi khusus.
+Jangan gunakan fitur tersebut untuk memasang versi 1.1.0.
+
+Untuk pembaruan, ikuti PANDUAN_PEMBARUAN.md.

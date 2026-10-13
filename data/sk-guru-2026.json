@@ -1,0 +1,212 @@
+[
+  {
+    "source_no": 1,
+    "name": "Dr. Muhammad Abduh Tuasikal,S.T., M.Sc.",
+    "status": "Guru",
+    "position": "Pembina Madrasah",
+    "source_class": "X",
+    "source_subject": "Al – Qur’an Hadits; Fiqih",
+    "total_jp": 4,
+    "notes": ""
+  },
+  {
+    "source_no": 2,
+    "name": "Abdurrahman, S.Pd.I., M.Pd.",
+    "status": "Pembina tanpa mapel",
+    "position": "Pembina Madrasah",
+    "source_class": "",
+    "source_subject": "",
+    "total_jp": 0,
+    "notes": "Status dan mapel kosong dalam SK."
+  },
+  {
+    "source_no": 3,
+    "name": "Gunarto, M.Si.",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Aqidah; Ilmu Kalam",
+    "total_jp": 4,
+    "notes": ""
+  },
+  {
+    "source_no": 4,
+    "name": "Sudip Pranowo, S.Pd.",
+    "status": "Guru",
+    "position": "Pembina Madrasah",
+    "source_class": "X",
+    "source_subject": "Bahasa Inggris",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 5,
+    "name": "Rudi Nur Ramadhan, S.Pd.",
+    "status": "Guru",
+    "position": "Kepala Madrasah",
+    "source_class": "X",
+    "source_subject": "Ushuk Tafsir; Ushul Fiqh",
+    "total_jp": 4,
+    "notes": "Ejaan Ushuk Tafsir dipertahankan sesuai SK; perlu konfirmasi."
+  },
+  {
+    "source_no": 6,
+    "name": "Yusuf Ramadhan, S.Ag.",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Ilmu Hadits; Tahfidz",
+    "total_jp": 4,
+    "notes": ""
+  },
+  {
+    "source_no": 7,
+    "name": "Ryan Firdaus Yusuf, S.Pd.",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Bahasa Arab; Nahwu; Shorof",
+    "total_jp": 7,
+    "notes": ""
+  },
+  {
+    "source_no": 8,
+    "name": "Riyan Triyono, S.Pd.",
+    "status": "Guru",
+    "position": "Waka Kurikulum",
+    "source_class": "X",
+    "source_subject": "Akhlak",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 9,
+    "name": "Eko Budiarto, S.Si.",
+    "status": "Guru",
+    "position": "Wali Kelas X",
+    "source_class": "X",
+    "source_subject": "Matematika",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 10,
+    "name": "Beni Wahyono, S.Kom.",
+    "status": "Guru",
+    "position": "Kepala Lab.",
+    "source_class": "X",
+    "source_subject": "Prakarya (Tik)",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 11,
+    "name": "Parjiyo, S.Pd.",
+    "status": "Guru",
+    "position": "Kepala Perpustakaan",
+    "source_class": "X",
+    "source_subject": "Bahasa Indonesia",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 12,
+    "name": "Muhammad Izzul Haq",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Seni Budaya",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 13,
+    "name": "Azhar Umar Said",
+    "status": "Guru",
+    "position": "Waka Sarpras",
+    "source_class": "X",
+    "source_subject": "Ekonomi",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 14,
+    "name": "Muhammad Farid Riza",
+    "status": "Guru",
+    "position": "Bedahara",
+    "source_class": "X",
+    "source_subject": "Ppkn",
+    "total_jp": 2,
+    "notes": "Ejaan Bedahara dipertahankan sesuai SK."
+  },
+  {
+    "source_no": 15,
+    "name": "Nufal Ra”uf",
+    "status": "Guru",
+    "position": "Waka Kesiswaan",
+    "source_class": "X",
+    "source_subject": "Geografi",
+    "total_jp": 1,
+    "notes": "Tidak digabung otomatis dengan Naufal Rauf (G013); perlu konfirmasi identitas."
+  },
+  {
+    "source_no": 16,
+    "name": "Hamid Ramadhan",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Olahraga",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 17,
+    "name": "Kholid Jaryanto, S.Pd.",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "SKI",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 18,
+    "name": "Sumpomo, M.Pd.",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Sejarah Indonesia",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 19,
+    "name": "Ammar",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Public Speaking",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 20,
+    "name": "Ismail",
+    "status": "Guru",
+    "position": "",
+    "source_class": "X",
+    "source_subject": "Microteaching",
+    "total_jp": 2,
+    "notes": ""
+  },
+  {
+    "source_no": 21,
+    "name": "Jalu Nugroho, S.M.",
+    "status": "Karyawan",
+    "position": "Kepala Tu",
+    "source_class": "",
+    "source_subject": "",
+    "total_jp": 0,
+    "notes": "Tidak ditambahkan mapel baru; mapel guru lama, bila ada, tetap dipertahankan."
+  }
+]

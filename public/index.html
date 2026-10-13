@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sekolah Absenku</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--blue:#1769e0;--navy:#133c75;--green:#24a168;--ink:#17324d;--line:#dce7f1;--paper:#f4f8fc}
+    *{box-sizing:border-box} body{margin:0;font-family:Poppins,sans-serif;color:var(--ink);background:var(--paper)}
+    button,input,select,textarea{font:inherit} button{cursor:pointer} button:disabled{cursor:not-allowed;opacity:.55}
+    button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8fc4ff;outline-offset:2px}
+    .app-view{min-height:calc(100 * min(var(--vh,1vh),1vh))}.hidden{display:none!important}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px rgba(20,67,110,.08)}
+    .field{width:100%;min-height:43px;border:1px solid #cbd5e1;border-radius:.75rem;padding:.65rem .8rem;background:#fff;font-size:.84rem;color:#17324d}
+    .label{display:block;font-size:.72rem;font-weight:700;color:#476078;margin-bottom:.35rem}
+    .nav{display:flex;gap:.7rem;align-items:center;width:100%;padding:.72rem .85rem;border:0;border-radius:11px;color:#dcecff;background:transparent;text-align:left;font-size:.8rem;font-weight:600}
+    .nav:hover,.nav.active{background:#ffffff20;color:#fff}
+    .badge{display:inline-flex;align-items:center;padding:.22rem .58rem;border-radius:999px;font-size:.68rem;font-weight:700}
+    .H{background:#dcfce7;color:#166534}.S{background:#dbeafe;color:#1d4ed8}.I{background:#fef3c7;color:#92400e}.A{background:#fee2e2;color:#b91c1c}.D{background:#ede9fe;color:#6d28d9}.N{background:#f1f5f9;color:#64748b}
+    .table-wrap{overflow:auto}.table{width:100%;min-width:760px;border-collapse:collapse;font-size:.76rem}.table th{padding:.72rem;text-align:left;background:#f8fafc;color:#64748b;font-size:.64rem;text-transform:uppercase;letter-spacing:.04em}.table td{padding:.65rem .72rem;border-top:1px solid #edf2f7;vertical-align:middle}
+    .status-btn{border:1px solid #cbd5e1;border-radius:.45rem;padding:.28rem .42rem;font-size:.68rem;font-weight:800;background:#fff;transition:.15s}.status-btn:hover{border-color:#1769e0}.status-btn.selected{background:#1769e0;color:#fff;border-color:#1769e0}
+    .toast{position:fixed;right:1rem;bottom:1rem;z-index:90;max-width:min(25rem,calc(100% - 2rem));transform:translateY(160%);transition:transform .25s ease}.toast.show{transform:translateY(0)}
+    .modal{position:fixed;inset:0;z-index:80;background:rgba(19,60,117,.42);padding:1rem;display:flex;align-items:center;justify-content:center}.modal-card{width:100%;max-width:34rem;max-height:calc(100 * min(var(--vh,1vh),1vh) - 2rem);overflow:auto}
+    .bar{min-height:8px;border-radius:999px;background:linear-gradient(90deg,#24a168,#72cf9d);transition:width .35s ease}.matrix-suppressed{display:none!important}
+    @media(max-width:767px){#sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-110%);transition:.25s;width:17rem;height:calc(100 * min(var(--vh,1vh),1vh))}#sidebar.open{transform:translateX(0)}}
+    @media print{#sidebar,header,.no-print,.toast,.modal{display:none!important}.page.hidden{display:block!important}body{background:#fff}.card{box-shadow:none}body.matrix-print-mode *{visibility:hidden!important}body.matrix-print-mode #matrix-preview,body.matrix-print-mode #matrix-preview *{visibility:visible!important}body.matrix-print-mode #matrix-preview{display:block!important;position:absolute;inset:0;width:100%;border:0;box-shadow:none;padding:0;margin:0}body.matrix-print-mode .table-wrap{overflow:visible!important}body.matrix-print-mode .matrix-table{min-width:0;font-size:9px}body.matrix-print-mode .matrix-table th,body.matrix-print-mode .matrix-table td{padding:4px;border:1px solid #9ca3af}}
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full" style="background: rgb(244, 248, 252);">
+  <div id="toast" class="toast card px-5 py-3 flex gap-2 items-center" role="status" aria-live="polite"><i data-lucide="circle-check" class="w-5 text-green-600"></i><span id="toast-text" class="text-sm font-medium"></span>
+  </div>
+  <main id="login" class="app-view flex items-center justify-center p-5">
+   <section class="card w-full max-w-4xl grid lg:grid-cols-2 overflow-hidden">
+    <div class="p-8 sm:p-11">
+     <div class="flex gap-3 items-center mb-7">
+      <div class="w-12 h-12 bg-blue-600 rounded-2xl text-white grid place-items-center">
+       <i data-lucide="graduation-cap"></i>
+      </div>
+      <div>
+       <h1 data-template-id="app-name" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 32px;">Sekolah Absenku</h1>
+       <p data-template-id="institution" class="canva-text text-xs" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Pondok Pesantren Yatim &amp; Dhuafa Darush Sholihin</p>
+      </div>
+     </div>
+     <h2 data-template-id="login-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Masuk ke aplikasi</h2>
+     <p data-template-id="login-copy" class="canva-text text-sm mt-2 mb-6" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Pilih akses Guru atau Admin untuk melanjutkan.</p><label class="label" for="username">Nama pengguna</label> <input id="username" class="field mb-4" placeholder="ID guru atau nama pengguna admin" autocomplete="username"><label class="label" for="password">Kata sandi</label> <input id="password" type="password" class="field mb-4" placeholder="Masukkan kata sandi" autocomplete="current-password">
+     <div class="grid sm:grid-cols-2 gap-3"><button type="button" class="role card border-2 border-blue-600 bg-blue-50 text-left p-5" data-role="Guru" aria-pressed="true"> <i data-lucide="book-open-check" class="text-blue-600 mb-3"></i><strong class="block">Guru</strong><span class="text-xs text-slate-500">Input absensi dan riwayat sendiri</span> </button> <button type="button" class="role card border-2 border-slate-200 text-left p-5" data-role="Admin" aria-pressed="false"> <i data-lucide="building-2" class="text-green-600 mb-3"></i><strong class="block">Admin</strong><span class="text-xs text-slate-500">Monitoring dan rekap sekolah</span> </button>
+     </div>
+     <div id="teacher-select-wrap" class="mt-4"><label class="label" for="teacher-account">Akun guru</label> <select id="teacher-account" class="field"></select>
+     </div><button id="login-btn" data-template-id="login-button" type="button" class="canva-button mt-5 w-full rounded-xl py-3 font-bold" style="background: rgb(23, 105, 224); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Masuk ke Aplikasi</button>
+     <p id="session-status" class="text-xs text-slate-500 mt-3" role="status" aria-live="polite"></p><button id="session-retry" type="button" class="hidden mt-2 text-xs font-bold text-blue-700 underline">Coba lagi</button>
+    </div>
+    <aside class="hidden lg:flex p-8 bg-[#e9f5ff] flex-col justify-between"><span data-template-id="welcome-tag" class="canva-tag text-xs font-bold tracking-widest" style="color: rgb(23, 105, 224); font-weight: 700; font-style: normal; font-size: 16px; letter-spacing: 0.08rem;">MONITORING AKADEMIK</span> <img data-template-id="welcome-image" loading="lazy" class="canva-image w-full h-56 object-cover rounded-[28px] shadow-lg" src="https://images.pexels.com/photos/5306480/pexels-photo-5306480.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="A teacher using a tablet in a bright classroom to explain a lesson to a student.">
+     <h2 data-template-id="welcome-title" class="canva-text font-bold leading-tight" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Kehadiran yang tercatat, pembinaan yang bermartabat.</h2>
+     <p data-template-id="welcome-copy" class="canva-text text-sm" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Kelola absensi siswa dan guru dengan akses yang jelas, data yang tersimpan, dan monitoring yang bertanggung jawab.</p>
+    </aside>
+   </section>
+  </main>
+  <div id="app" class="hidden app-view md:flex">
+   <aside id="sidebar" class="bg-[#133c75] text-white p-4 flex flex-col shrink-0 md:w-64">
+    <div class="flex gap-3 items-center px-2 mb-7">
+     <div class="w-10 h-10 rounded-xl bg-white/15 grid place-items-center">
+      <i data-lucide="graduation-cap"></i>
+     </div>
+     <div>
+      <strong class="text-sm">Sekolah Absenku</strong><span id="academic-year-label" class="block text-[10px] text-blue-100"></span>
+     </div>
+    </div>
+    <nav id="menu" aria-label="Navigasi aplikasi" class="space-y-1"></nav>
+    <div class="mt-auto border-t border-white/15 pt-4">
+     <p id="side-name" class="text-xs font-bold px-2"></p>
+     <p id="side-role" class="text-[10px] text-blue-100 px-2 mt-1"></p><button id="logout" type="button" class="mt-3 w-full rounded-xl bg-white/10 hover:bg-white/20 py-2 text-xs font-bold">Keluar</button>
+    </div>
+   </aside>
+   <div class="w-full min-w-0">
+    <header class="bg-white border-b border-slate-200 px-5 sm:px-8 py-4 flex items-center justify-between"><button id="menu-btn" class="md:hidden p-2 rounded-lg" aria-label="Buka navigasi"><i data-lucide="menu"></i></button>
+     <div>
+      <p id="header-date" class="text-xs text-slate-500"></p>
+      <h1 id="header-title" class="font-bold text-lg">Dashboard</h1>
+     </div>
+     <div class="text-right">
+      <span id="role-badge" class="badge bg-blue-100 text-blue-800"></span>
+      <p id="header-name" class="text-xs mt-1 font-semibold"></p>
+     </div>
+    </header>
+    <main class="p-5 sm:p-7 max-w-7xl mx-auto">
+     <section id="guru-dashboard" class="page">
+      <div class="flex flex-wrap justify-between gap-4 mb-5">
+       <div>
+        <h2 data-template-id="guru-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Dashboard Guru</h2>
+        <p data-template-id="guru-copy" class="canva-text text-sm mt-1" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Kelola check-in pribadi dan absensi siswa untuk kelas yang Anda pilih.</p>
+       </div>
+       <div class="flex flex-wrap gap-2 no-print items-center">
+        <span id="checkin-status" class="badge N">Jam belum diisi</span><span class="text-xs text-slate-500">Kehadiran guru hari ini</span><label class="sr-only" for="teacher-in-time">Jam masuk</label><input id="teacher-in-time" type="time" class="field w-auto" aria-label="Jam masuk"><label class="sr-only" for="teacher-out-time">Jam keluar</label><input id="teacher-out-time" type="time" class="field w-auto" aria-label="Jam keluar"><button id="save-teacher-time" type="button" class="rounded-xl bg-green-600 text-white px-4 py-3 font-bold text-sm"><i data-lucide="clock-3" class="inline w-4 mr-1"></i>Simpan Jam</button>
+       </div>
+      </div>
+      <article class="card p-4 mb-5 no-print">
+       <div class="grid sm:grid-cols-3 gap-3">
+        <div>
+         <label class="label" for="g-date">Tanggal aktif</label><input id="g-date" type="date" class="field">
+        </div>
+        <div>
+         <label class="label" for="g-class">Kelas</label><select id="g-class" class="field"></select>
+        </div><div>
+         <label class="label" for="g-subject">Mata Pelajaran</label><select id="g-subject" class="field" required></select>
+        </div>
+        <div class="flex items-end">
+         <button id="all-present" type="button" class="w-full rounded-xl border border-blue-600 text-blue-700 py-3 font-bold text-sm">Tandai semua Hadir</button>
+        </div>
+       </div>
+       <p id="class-note" class="text-xs text-slate-500 mt-3"></p>
+      </article>
+      <div id="guru-stats" class="grid sm:grid-cols-3 gap-4 mb-5"></div>
+      <article class="card p-4">
+       <div class="flex justify-between gap-3 mb-3">
+        <div>
+         <h3 class="font-bold">Absensi siswa</h3>
+         <p class="text-xs text-slate-500">Input oleh: <span id="input-by"></span></p>
+        </div><button id="save-class" type="button" class="no-print rounded-xl bg-blue-600 text-white px-5 font-bold text-sm">Simpan Absensi</button>
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>Nama / NIS</th>
+           <th>Kelas</th>
+           <th>Status</th>
+           <th>Keterangan</th>
+           <th>Tersimpan</th>
+          </tr>
+         </thead>
+         <tbody id="guru-rows"></tbody>
+        </table>
+       </div>
+      </article>
+     </section>
+     <section id="admin-dashboard" class="page hidden">
+      <div class="mb-5">
+       <h2 data-template-id="admin-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Dashboard Monitoring Kehadiran</h2>
+       <p data-template-id="admin-copy" class="canva-text text-sm mt-1" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Pantau KPI, status kehadiran, dan aktivitas input berdasarkan catatan absensi tersimpan.</p>
+      </div>
+      <article class="card p-4 mb-5 no-print">
+       <div class="grid sm:grid-cols-2 xl:grid-cols-6 gap-3">
+        <div>
+         <label class="label" for="a-period">Periode rekapan</label><select id="a-period" class="field"><option value="weekly">Pekanan</option><option value="monthly">Bulanan</option><option value="semester">Semester</option></select>
+        </div>
+        <div id="month-filter-wrap">
+         <label class="label" for="a-month">Bulan</label><select id="a-month" class="field"></select>
+        </div>
+        <div id="year-filter-wrap">
+         <label class="label" for="a-year">Tahun</label><select id="a-year" class="field"></select>
+        </div>
+        <div id="semester-filter-wrap" class="hidden">
+         <label class="label" for="a-semester">Semester</label><select id="a-semester" class="field"></select>
+        </div>
+        <div>
+         <label class="label" for="a-level">Jenjang</label><select id="a-level" class="field"></select>
+        </div>
+        <div>
+         <label class="label" for="a-class">Kelas</label><select id="a-class" class="field"></select>
+        </div><div><label class="label" for="a-subject">Mapel</label><select id="a-subject" class="field"></select>
+        </div>
+        <div class="flex items-end gap-2">
+         <button id="reset-admin-filters" type="button" class="rounded-xl border border-slate-300 text-slate-600 px-3 py-3 font-bold text-sm">Reset</button><button id="matrix-report" type="button" class="rounded-xl border border-slate-300 text-slate-700 px-3 py-3 font-bold text-sm">Matriks</button><button id="print-report" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-3 py-3 font-bold text-sm">Cetak</button><button id="download-monitoring-report" data-testid="download-monitoring-report" type="button" class="flex-1 rounded-xl bg-blue-600 text-white px-3 py-3 font-bold text-sm">Unduh Laporan</button>
+        </div><a id="download-fallback" class="hidden text-sm font-semibold text-blue-700 underline mt-3" aria-label="Unduh Laporan">Klik di sini untuk mengunduh laporan CSV</a>
+       </div>
+       <p id="filter-summary" class="text-xs text-slate-500 mt-3"></p>
+      </article>
+      <section id="matrix-preview" class="hidden card p-5 mb-5" aria-label="Pratinjau laporan matriks">
+       <div class="flex flex-wrap items-end justify-between gap-4 mb-5 no-print">
+        <div class="flex flex-wrap gap-3">
+         <div>
+          <label class="label" for="matrix-class">Kelas</label><select id="matrix-class" class="field"><option value="">Semua Kelas</option></select>
+         </div>
+         <div>
+          <label class="label" for="matrix-month">Bulan laporan</label><select id="matrix-month" class="field"></select>
+         </div>
+         <div>
+          <label class="label" for="matrix-year">Tahun</label><select id="matrix-year" class="field"></select>
+         </div>
+        </div>
+        <div class="flex gap-2">
+         <button id="matrix-back" type="button" class="rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold">Kembali</button><button id="matrix-print" type="button" class="rounded-xl bg-blue-600 text-white px-4 py-3 text-sm font-bold">Cetak Laporan</button>
+        </div>
+       </div>
+       <div id="matrix-print-area">
+        <h2 id="matrix-title" class="font-bold text-center mb-4">LAPORAN ABSENSI BULANAN</h2>
+        <div class="table-wrap">
+         <table class="table matrix-table">
+          <thead id="matrix-head"></thead>
+          <tbody id="matrix-rows"></tbody>
+         </table>
+        </div>
+       </div>
+      </section>
+      <div id="kpis" class="grid sm:grid-cols-2 xl:grid-cols-5 gap-4 mb-5"></div>
+      <article id="daily-report-wrap" class="card p-4 mb-5 hidden">
+       <h3 class="font-bold mb-3">Rekap Absensi Harian</h3>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>Tanggal</th>
+           <th>Hadir</th>
+           <th>Terlambat</th>
+           <th>Izin</th>
+           <th>Sakit</th>
+           <th>Alpa</th>
+           <th>Total</th>
+          </tr>
+         </thead>
+         <tbody id="daily-report-rows"></tbody>
+        </table>
+       </div>
+      </article>
+      <div class="grid xl:grid-cols-2 gap-5">
+       <article class="card p-5">
+        <h3 class="font-bold">Status kehadiran</h3>
+        <p class="text-xs text-slate-500 mb-4">Berdasarkan catatan sesuai filter aktif</p>
+        <div id="bars" class="space-y-3"></div>
+       </article>
+       <article class="card p-5">
+        <h3 class="font-bold">Aktivitas Input Terbaru</h3>
+        <p class="text-xs text-slate-500 mb-4">Berdasarkan catatan sesuai filter aktif</p>
+        <div id="activities" class="space-y-3"></div>
+       </article>
+      </div>
+     </section>
+     <section id="students" class="page hidden">
+      <a href="/master-admin.html" class="inline-block rounded-xl bg-blue-600 text-white px-4 py-3 mb-4 font-bold text-sm">Manajemen Akademik</a>
+      <div class="flex flex-wrap justify-between gap-4 mb-5">
+       <div>
+        <h2 data-template-id="students-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Data Siswa/Santri</h2>
+        <p data-template-id="students-copy" class="canva-text text-sm mt-1" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Data siswa aktif dapat dicari dan difilter berdasarkan jenjang maupun kelas.</p>
+       </div>
+      </div>
+      <article class="card p-4">
+       <div class="grid sm:grid-cols-3 gap-3 mb-4 no-print">
+        <div class="sm:col-span-1">
+         <label class="label" for="student-search">Cari siswa</label><input id="student-search" class="field" placeholder="Nama atau NIS">
+        </div>
+        <div>
+         <label class="label" for="student-level">Jenjang</label><select id="student-level" class="field"></select>
+        </div>
+        <div>
+         <label class="label" for="student-class">Kelas</label><select id="student-class" class="field"></select>
+        </div>
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>No</th>
+           <th>NIS/NISN</th>
+           <th>Nama</th>
+           <th>Jenjang</th>
+           <th>Kelas</th>
+           <th>Status</th>
+          </tr>
+         </thead>
+         <tbody id="student-list"></tbody>
+        </table>
+       </div>
+       <div id="student-pagination" class="mt-4 flex justify-end gap-2"></div>
+      </article>
+     </section>
+     <section id="teachers" class="page hidden">
+      <a href="/master-admin.html" class="inline-block rounded-xl bg-blue-600 text-white px-4 py-3 mb-4 font-bold text-sm">Manajemen Akademik</a>
+      <h2 data-template-id="teachers-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Data Guru</h2>
+      <p data-template-id="teachers-copy" class="canva-text text-sm mt-1 mb-5" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Data guru dan mapel dari database sekolah, termasuk penugasan SK MA.</p>
+      <article class="card p-4">
+       <div class="mb-4 no-print">
+        <label class="label" for="teacher-search">Cari guru</label><input id="teacher-search" class="field max-w-md" placeholder="Nama, ID, atau mata pelajaran">
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>No</th>
+           <th>ID/NIP</th>
+           <th>Nama Guru</th>
+           <th>Mata Pelajaran</th>
+           <th>Jabatan</th>
+           <th>Status</th>
+          </tr>
+         </thead>
+         <tbody id="teacher-list"></tbody>
+        </table>
+       </div>
+       <div id="teacher-pagination" class="mt-4 flex justify-end gap-2"></div>
+      </article>
+     </section>
+     <section id="history" class="page hidden">
+      <h2 data-template-id="history-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Riwayat Absensi</h2>
+      <p data-template-id="history-copy" class="canva-text text-sm mt-1 mb-5" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Riwayat ditampilkan dari catatan absensi yang telah tersimpan.</p>
+      <article class="card p-4">
+       <div class="grid sm:grid-cols-3 gap-3 mb-4 no-print">
+        <div>
+         <label class="label" for="history-search">Cari riwayat</label><input id="history-search" class="field" placeholder="Nama, kelas, mapel, atau petugas">
+        </div>
+        <div>
+         <label class="label" for="history-status">Status</label><select id="history-status" class="field"><option value="">Semua status</option><option value="H">Hadir</option><option value="S">Sakit</option><option value="I">Izin</option><option value="A">Alpa</option><option value="D">Dispensasi</option></select>
+        </div>
+        <div>
+         <label class="label" for="history-date">Tanggal</label><input id="history-date" class="field" type="date">
+        </div>
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>Tanggal</th>
+           <th>Nama</th>
+           <th>Kelas</th>
+           <th>Mapel</th>
+           <th>Status</th>
+           <th>Input oleh</th>
+           <th>Aksi</th>
+          </tr>
+         </thead>
+         <tbody id="history-list"></tbody>
+        </table>
+       </div>
+       <div id="history-pagination" class="mt-4 flex justify-end gap-2"></div>
+      </article>
+     </section>
+     <section id="profile" class="page hidden">
+      <h2 data-template-id="profile-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Profil Guru</h2>
+      <article class="card p-6 mt-5 max-w-xl">
+       <p id="profile-data" class="text-sm leading-7"></p>
+      </article>
+     </section>
+     <section id="teacher-journal" class="page hidden">
+      <div class="flex flex-wrap justify-between gap-4 mb-5">
+       <div>
+        <h2 data-template-id="journal-title" class="canva-text font-bold text-xl" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Jurnal Guru</h2>
+        <p class="text-sm text-slate-500 mt-1">Catat materi dan kegiatan mengajar.</p>
+       </div><button id="print-journal" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-4 py-3 font-bold text-sm">Cetak / Unduh Jurnal</button>
+      </div>
+      <article class="card p-5 mb-5">
+       <form id="journal-form" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div>
+         <label class="label" for="journal-teacher">Nama Guru</label><input id="journal-teacher" class="field" required="">
+        </div>
+        <div>
+         <label class="label" for="journal-subject">Mata Pelajaran</label><select id="journal-subject" class="field" required></select>
+        </div><div>
+         <label class="label" for="journal-class">Kelas</label><select id="journal-class" class="field" required></select>
+        </div><div>
+         <label class="label" for="journal-date">Tanggal</label><input id="journal-date" type="date" class="field" required="">
+        </div>
+        <div>
+         <label class="label" for="journal-material">Materi yang Disampaikan</label><input id="journal-material" class="field" required="">
+        </div>
+        <div>
+         <label class="label" for="journal-start">Jam mulai</label><input id="journal-start" type="time" class="field" required="">
+        </div>
+        <div>
+         <label class="label" for="journal-end">Jam selesai</label><input id="journal-end" type="time" class="field" required="">
+        </div>
+        <div>
+         <label class="label" for="journal-duration">Durasi</label><input id="journal-duration" class="field" readonly="" aria-label="Durasi otomatis">
+        </div>
+        <div class="sm:col-span-2 xl:col-span-3">
+         <label class="label" for="journal-challenges">Kendala Saat Mengajar</label><textarea id="journal-challenges" class="field" rows="2"></textarea>
+        </div>
+        <div class="sm:col-span-2 xl:col-span-3 flex gap-2">
+         <button id="save-journal" type="submit" class="rounded-xl bg-blue-600 text-white px-5 py-3 font-bold">Simpan Jurnal</button><button id="cancel-journal-edit" type="button" class="hidden rounded-xl border px-5 py-3 font-bold">Batal Edit</button>
+        </div>
+       </form>
+      </article>
+      <article class="card p-4">
+       <div id="journal-filters" class="grid sm:grid-cols-2 gap-3 mb-4">
+        <div>
+         <label class="label" for="journal-search">Cari nama guru</label><input id="journal-search" class="field">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+         <div>
+          <label class="label" for="journal-from">Dari tanggal</label><input id="journal-from" type="date" class="field">
+         </div>
+         <div>
+          <label class="label" for="journal-to">Sampai tanggal</label><input id="journal-to" type="date" class="field">
+         </div>
+        </div>
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>No</th>
+           <th>Nama Guru</th>
+           <th>Tanggal</th>
+           <th>Mapel</th><th>Kelas</th><th>Materi yang Disampaikan</th>
+           <th>Jam Mengajar</th>
+           <th>Durasi</th>
+           <th>Kendala</th>
+           <th>Aksi</th>
+          </tr>
+         </thead>
+         <tbody id="journal-list"></tbody>
+        </table>
+       </div>
+      </article>
+     </section>
+     <section id="teacher-attendance" class="page hidden">
+      <div class="flex flex-wrap justify-between gap-4 mb-5">
+       <div>
+        <h2 data-template-id="teacher-attendance-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Rekapan Check-in &amp; Check-out Guru</h2>
+        <p data-template-id="teacher-attendance-copy" class="canva-text text-sm mt-1" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Pantau waktu check-in dan check-out guru dari data yang tersimpan.</p>
+       </div>
+       <div class="flex gap-2 no-print">
+        <button id="print-teacher-attendance" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-4 py-3 font-bold text-sm">Cetak Rekapan</button><button id="download-teacher-attendance" type="button" class="rounded-xl bg-blue-600 text-white px-4 py-3 font-bold text-sm">Unduh CSV</button>
+       </div>
+      </div>
+      <article class="card p-4 mb-5 no-print">
+       <div class="grid sm:grid-cols-2 xl:grid-cols-5 gap-3">
+        <div>
+         <label class="label" for="teacher-attendance-search">Cari nama guru</label><input id="teacher-attendance-search" class="field" placeholder="Nama guru">
+        </div>
+        <div>
+         <label class="label" for="teacher-period">Periode</label><select id="teacher-period" class="field"><option value="weekly">Pekan</option><option value="monthly">Bulan</option><option value="semester">Semester</option></select>
+        </div>
+        <div id="teacher-week-wrap">
+         <label class="label" for="teacher-week">Tanggal dalam pekan</label><input id="teacher-week" type="date" class="field">
+        </div>
+        <div id="teacher-month-wrap" class="hidden">
+         <label class="label" for="teacher-month">Bulan dan tahun</label><input id="teacher-month" type="month" class="field">
+        </div>
+        <div id="teacher-semester-wrap" class="hidden">
+         <label class="label" for="teacher-semester">Semester dan tahun ajaran</label><select id="teacher-semester" class="field"></select>
+        </div>
+        <div class="flex items-end">
+         <button id="show-teacher-summary" type="button" class="w-full rounded-xl bg-blue-600 text-white px-4 py-3 font-bold text-sm">Tampilkan Rekap</button>
+        </div>
+       </div>
+      </article>
+      <div id="teacher-attendance-summary" class="grid sm:grid-cols-3 gap-4 mb-5"></div>
+      <article class="card p-4">
+       <div class="flex justify-end mb-3 no-print">
+        <button id="print-teacher-summary" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-4 py-2 font-bold text-sm">Cetak Rekap</button>
+       </div>
+       <div class="table-wrap">
+        <table class="table">
+         <thead>
+          <tr>
+           <th>No</th>
+           <th>Nama Guru</th>
+           <th>Tanggal</th>
+           <th>Jam Check-in</th>
+           <th>Jam Check-out</th>
+           <th>Durasi</th>
+           <th>Status</th>
+          </tr>
+         </thead>
+         <tbody id="teacher-attendance-list"></tbody>
+        </table>
+       </div>
+      </article>
+     </section>
+     <section id="user-management" class="page hidden">
+      <div class="flex flex-wrap justify-between gap-4 mb-5">
+       <div>
+        <h2 class="font-bold" style="color:#17324d;font-size:24px">Manajemen Akun Guru</h2>
+        <p class="text-sm text-slate-500 mt-1">Buat, reset, aktifkan, atau nonaktifkan akun login guru dari satu halaman.</p>
+       </div>
+       <div class="flex flex-wrap gap-2 no-print">
+        <button id="refresh-teacher-users" type="button" class="rounded-xl border border-slate-300 px-4 py-3 font-bold text-sm">Muat Ulang</button>
+        <button id="bulk-create-teacher-users" type="button" class="rounded-xl bg-blue-600 text-white px-4 py-3 font-bold text-sm">Buat Semua Akun yang Belum Ada</button>
+       </div>
+      </div>
+      <div id="teacher-user-summary" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5"></div>
+      <article class="card p-4">
+       <div class="table-wrap">
+        <table class="table">
+         <thead><tr><th>No</th><th>ID Guru</th><th>Nama Guru</th><th>Username</th><th>Status Akun</th><th>Aksi</th></tr></thead>
+         <tbody id="teacher-user-list"></tbody>
+        </table>
+       </div>
+       <p class="text-xs text-slate-500 mt-4">Password tidak dapat dilihat kembali. Jika lupa, Admin dapat menggunakan tombol <b>Reset Password</b>. Akun yang dinonaktifkan tidak dapat login.</p>
+      </article>
+     </section>
+     <section id="admin-tools" class="page hidden">
+      <a href="/master-admin.html" class="inline-block rounded-xl bg-blue-600 text-white px-4 py-3 mb-4 font-bold text-sm">Manajemen Akademik</a>
+      <h2 data-template-id="tools-title" class="canva-text font-bold" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Rekap &amp; Pengaturan Aplikasi</h2>
+      <p data-template-id="tools-copy" class="canva-text text-sm mt-1 mb-5" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Cetak atau ekspor laporan berbasis catatan absensi yang tersimpan.</p>
+      <article class="card p-6">
+       <button id="export-csv" type="button" class="rounded-xl bg-blue-600 text-white px-5 py-3 font-bold"><i data-lucide="download" class="inline w-4 mr-1"></i>Ekspor Excel (CSV)</button>
+       <div class="mt-6 border-t border-red-100 pt-5">
+        <h3 class="font-bold text-red-700">Zona berbahaya</h3>
+        <p class="text-xs text-slate-500 mt-1 mb-3">Hapus seluruh data operasional yang tersimpan: absensi siswa, check-in/check-out guru, jurnal guru, dan sesi login. Data master siswa, guru, kelas, serta akun pengguna tetap aman.</p><button id="reset-all-data" type="button" class="rounded-xl border border-red-300 bg-red-50 text-red-700 px-5 py-3 font-bold hover:bg-red-100">Reset seluruh data</button>
+       </div>
+       <p class="text-xs text-slate-500 mt-3">Ekspor mengikuti filter monitoring aktif dan tidak mengubah data absensi.</p>
+      </article>
+     </section>
+     <section id="error-page" class="page hidden">
+      <article class="card max-w-xl mx-auto text-center p-10">
+       <i data-lucide="triangle-alert" class="w-12 h-12 mx-auto text-red-500"></i>
+       <h2 data-template-id="error-title" class="canva-text font-bold mt-4" style="color: rgb(23, 50, 77); font-weight: 700; font-style: normal; font-size: 24px;">Terjadi kendala</h2>
+       <p data-template-id="error-copy" class="canva-text text-sm mt-2" style="color: rgb(102, 119, 138); font-weight: 400; font-style: normal; font-size: 16px;">Terjadi kendala. Silakan coba lagi.</p><button id="retry-btn" type="button" class="mt-5 rounded-xl bg-blue-600 text-white px-5 py-3 font-bold">Coba lagi</button>
+      </article>
+     </section>
+    </main>
+   </div>
+  </div>
+  <div id="teacher-user-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="teacher-user-modal-title">
+   <form id="teacher-user-form" class="modal-card card p-6">
+    <div class="flex justify-between gap-4 items-start"><div><h2 id="teacher-user-modal-title" class="font-bold text-lg">Akun Guru</h2><p id="teacher-user-person" class="text-xs text-slate-500 mt-1"></p></div><button id="close-teacher-user-modal" type="button" class="p-2 rounded-lg" aria-label="Tutup"><i data-lucide="x"></i></button></div>
+    <input id="teacher-user-id" type="hidden">
+    <div class="mt-5"><label class="label" for="teacher-user-username">Username</label><input id="teacher-user-username" class="field" required autocomplete="off"></div>
+    <div class="mt-4"><label class="label" for="teacher-user-password">Password baru</label><div class="flex gap-2"><input id="teacher-user-password" type="text" minlength="10" class="field" required autocomplete="off"><button id="generate-teacher-password" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-4 font-bold text-sm whitespace-nowrap">Buat Password</button></div><p class="text-xs text-slate-500 mt-2">Minimal 10 karakter. Simpan password ini sebelum menutup jendela.</p></div>
+    <p id="teacher-user-form-status" class="text-sm text-slate-500 mt-3"></p>
+    <div class="flex justify-end gap-3 mt-5"><button id="cancel-teacher-user-modal" type="button" class="rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold">Batal</button><button id="save-teacher-user" type="submit" class="rounded-xl bg-blue-600 text-white px-5 py-3 text-sm font-bold">Simpan Akun</button></div>
+   </form>
+  </div>
+  <div id="bulk-user-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="bulk-user-modal-title">
+   <section class="modal-card card p-6" style="max-width:52rem">
+    <div class="flex justify-between gap-4 items-start"><div><h2 id="bulk-user-modal-title" class="font-bold text-lg">Akun Guru Berhasil Dibuat</h2><p class="text-xs text-slate-500 mt-1">Password sementara hanya ditampilkan sekarang. Unduh CSV sebelum menutup jika ingin menyimpannya.</p></div><button id="close-bulk-user-modal-x" type="button" class="p-2 rounded-lg" aria-label="Tutup"><i data-lucide="x"></i></button></div>
+    <div class="table-wrap mt-5"><table class="table"><thead><tr><th>ID</th><th>Nama</th><th>Username</th><th>Password Sementara</th></tr></thead><tbody id="bulk-user-credentials"></tbody></table></div>
+    <div class="flex flex-wrap justify-end gap-3 mt-5"><button id="download-bulk-users" type="button" class="rounded-xl border border-blue-600 text-blue-700 px-4 py-3 text-sm font-bold">Unduh CSV Akun</button><button id="close-bulk-user-modal" type="button" class="rounded-xl bg-blue-600 text-white px-5 py-3 text-sm font-bold">Selesai</button></div>
+   </section>
+  </div>
+  <div id="edit-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+   <form id="edit-form" class="modal-card card p-6">
+    <div class="flex justify-between gap-4 items-start">
+     <div>
+      <h2 id="edit-modal-title" class="font-bold text-lg">Edit Absensi</h2>
+      <p id="edit-person" class="text-xs text-slate-500 mt-1"></p>
+     </div><button id="close-edit" type="button" class="p-2 rounded-lg" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div><input id="edit-id" type="hidden">
+    <div class="grid sm:grid-cols-2 gap-4 mt-5">
+     <div>
+      <label class="label" for="edit-date">Tanggal</label><input id="edit-date" type="date" class="field" required="">
+     </div>
+     <div>
+      <label class="label" for="edit-status">Status</label><select id="edit-status" class="field" required=""><option value="H">Hadir</option><option value="S">Sakit</option><option value="I">Izin</option><option value="A">Alpa</option><option value="D">Dispensasi</option></select>
+     </div>
+     <div>
+      <label class="label" for="edit-in">Jam masuk</label><input id="edit-in" type="time" class="field">
+     </div>
+     <div>
+      <label class="label" for="edit-out">Jam keluar</label><input id="edit-out" type="time" class="field">
+     </div>
+    </div>
+    <div class="mt-4">
+     <label class="label" for="edit-note">Keterangan</label><textarea id="edit-note" class="field min-h-24" maxlength="250"></textarea>
+    </div>
+    <p id="edit-error" class="hidden text-sm text-red-600 mt-3" role="alert"></p>
+    <div class="flex justify-end gap-3 mt-5">
+     <button id="cancel-edit" type="button" class="rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold">Batal</button><button id="save-edit" type="submit" class="rounded-xl bg-blue-600 text-white px-5 py-3 text-sm font-bold">Simpan Perubahan</button>
+    </div>
+   </form>
+  </div>
+  <div id="download-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="download-modal-title">
+   <section class="modal-card card p-6">
+    <h2 id="download-modal-title" class="font-bold text-lg">Unduh laporan CSV</h2>
+    <p id="download-modal-message" class="text-sm text-slate-600 mt-2">Unduhan otomatis diblokir. Gunakan link unduhan di bawah.</p><a id="download-modal-link" class="inline-block mt-5 rounded-xl bg-blue-600 text-white px-5 py-3 text-sm font-bold" target="_blank" rel="noopener noreferrer">Klik di sini untuk mengunduh laporan CSV</a>
+    <div class="flex justify-end mt-5">
+     <button id="close-download-modal" type="button" class="rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold">Tutup</button>
+    </div>
+   </section>
+  </div>
+  <div id="reset-all-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="reset-all-title">
+   <form id="reset-all-form" class="modal-card card p-6">
+    <h2 id="reset-all-title" class="font-bold text-lg text-red-700">Hapus seluruh data?</h2>
+    <p class="text-sm text-slate-600 mt-2">Tindakan ini akan menghapus seluruh data operasional yang tersimpan, termasuk absensi siswa, check-in/check-out guru, jurnal guru, dan seluruh sesi login. Data master siswa, guru, kelas, serta akun pengguna tidak akan dihapus. Setelah reset, Anda harus login kembali.</p><label class="label mt-5" for="reset-all-confirm">Ketik tepat: HAPUS SEMUA DATA</label> <input id="reset-all-confirm" class="field" autocomplete="off" spellcheck="false">
+    <p id="reset-all-status" class="text-sm text-slate-500 mt-3" role="status"></p>
+    <div class="flex justify-end gap-3 mt-5">
+     <button id="cancel-reset-all" type="button" class="rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold">Batal</button><button id="confirm-reset-all" type="submit" disabled="" class="rounded-xl bg-red-600 text-white px-5 py-3 text-sm font-bold">Hapus seluruh data</button>
+    </div>
+   </form>
+  </div>
+  <script src="/backend-client.js"></script>
+  <script>
+const APP_CONFIG={
+  academicYear:'2026/2027',
+  academicYearStart:2026,
+  semester:1,
+  pageSize:10,
+  maxSessionAttempts:5,
+  lockoutMs:60000
+};
+
+/*
+ Backend contract (optional). When the real backend is ready, expose:
+ window.absensiBackend = {
+   auth: {
+     login: async ({role, username, password, teacherId}) => ({isOk:true,user:{id,name,subject,position},session:{id,token}}),
+     logout: async ({session, user}) => ({isOk:true})
+   },
+   data: {
+     init: async ({onDataChanged}) => ({isOk:true,data:[]}),
+     create: async (payload) => ({isOk:true,data:{...payload,__backendId:'...'}}),
+     update: async (recordWithBackendId) => ({isOk:true,data:recordWithBackendId}),
+     delete: async (recordWithBackendId) => ({isOk:true})
+   },
+   masterData: {
+     load: async () => ({isOk:true,teachers:[],students:[]})
+   }
+ };
+ If it is absent, the app falls back to window.dataSdk and built-in demo master data.
+*/
+
+const DEFAULT_TEACHERS=[];
+
+const DEFAULT_GROUPS={'1 SMP':[],'2 SMP':[],'3 SMP':[],'1 MA':[],'2 MA':[],'3 MA':[]};
+
+const STANDARD_CLASSES=['SD 1','SD 2','SD 3','SD 4','SD 5','SD 6','1 SMP','2 SMP','3 SMP','1 MA','2 MA','3 MA'];
+const labels={H:'Hadir',S:'Sakit',I:'Izin',A:'Alpa',D:'Dispensasi'};
+const $=id=>document.getElementById(id);
+const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const safeArray=value=>{
+  if(Array.isArray(value))return value;
+  if(!value||typeof value!=='object'||typeof value.then==='function')return [];
+  for(const candidate of [value.data,value.records,value.items,value.rows])if(Array.isArray(candidate))return candidate;
+  return value.__backendId||value.record_type?[value]:[];
+};
+const isoToday=()=>{
+  const d=new Date(),offset=d.getTimezoneOffset();
+  return new Date(d.getTime()-offset*60000).toISOString().slice(0,10);
+};
+const isValidDate=value=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(String(value||''))||value<'1900-01-01'||value>'2200-12-31')return false;const d=new Date(`${value}T00:00:00Z`);return !Number.isNaN(d.getTime())&&d.toISOString().slice(0,10)===value;};
+const attendanceDateOf=record=>{for(const key of ['attendance_date','attendanceDate','date','tanggal']){const value=record?.[key];if(value!==undefined&&value!==null&&String(value).trim())return String(value).trim()}return ''};
+const attendanceDateKey=record=>{const match=attendanceDateOf(record).match(/^(\d{4}-\d{2}-\d{2})/);return match?match[1]:''};
+const attendanceDateLabel=record=>{const key=attendanceDateKey(record);return key?new Date(`${key}T00:00:00`).toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'}):'Tidak ada tanggal'};
+const statusOf=r=>labels[r?.status]?r.status:'N';
+const validTeacherTime=value=>/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(String(value||''));
+const validTimeOrder=(start,end)=>validTeacherTime(start)&&validTeacherTime(end)&&end>=start;
+
+let teachers=[...DEFAULT_TEACHERS];
+let students=[];
+let classes=[];
+let masterClasses=[];
+let teacherClasses=[];
+let role='Guru',account=null,session=null,records=[],activePage='',lastFeature='',busy=false,dataReady=false,loginAttempt=0,sessionAttempts=0,sessionBlockedUntil=0,deleteId='',activeEdit=null,editingJournalId='',activeDownloadUrl='';
+let pages={students:1,teachers:1,history:1};
+let attendanceSession={teacherId:'',recordId:'',checkInTime:'',checkOutTime:'',dirty:false};
+let teacherUserRows=[],teacherUsersLoaded=false,teacherUsersLoading=false,bulkUserCredentials=[];
+const attendanceDrafts=new Map();
+const saveStates=new Map();
+
+function buildFallbackStudents(){
+  return Object.entries(DEFAULT_GROUPS).flatMap(([className,rows])=>rows.map((row,index)=>{const [id,name]=String(row).split('|');return{id:id||`NOID-${className}-${index+1}`,displayId:id||'',name:name||'Tanpa nama',className,level:className.includes('MA')?'MA':className.includes('SMP')?'SMP':'SD',no:index+1}}));
+}
+function normalizeTeacher(t,index){return{id:String(t?.id||t?.teacher_id||`G${String(index+1).padStart(3,'0')}`),name:String(t?.name||t?.teacher_name||'Tanpa nama'),subject:String(t?.subject??t?.mapel??''),position:String(t?.position||t?.jabatan||'Guru'),no:index+1}}
+function normalizeStudent(s,index){const className=String(s?.className||s?.class_name||s?.kelas||'').trim();const id=String(s?.id||s?.student_number||s?.nis||s?.nisn||`NOID-${index+1}`);return{id,displayId:String(s?.displayId||s?.student_number||s?.nis||s?.nisn||''),name:String(s?.name||s?.student_name||'Tanpa nama'),className,level:String(s?.level||s?.jenjang||(className.includes('MA')?'MA':className.includes('SMP')?'SMP':'SD')),no:index+1}}
+function rebuildMasterIndexes(){
+  classes=[...new Set([...masterClasses.map(c=>c.name),...students.map(s=>s.className).filter(Boolean)])];
+  teacherClasses=classes.filter(c=>students.some(s=>s.className===c));
+
+}
+async function loadMasterData(){
+
+  const loader=window.absensiBackend?.masterData?.load;
+  if(typeof loader!=='function')return;
+  try{
+    const result=await loader();
+    if(!result?.isOk)throw Error(result?.error?.message||'Master data belum tersedia.');
+    if(Array.isArray(result?.teachers))teachers=result.teachers.map(normalizeTeacher);
+    if(Array.isArray(result?.students))students=result.students.map(normalizeStudent).filter(s=>s.className);
+    masterClasses=Array.isArray(result.classes)?result.classes:[];
+    if(result.settings)Object.assign(APP_CONFIG,result.settings);
+    if(role==='Guru'&&account){const teacher=teachers.find(t=>t.id===account.id);if(teacher)Object.assign(account,teacher);}
+    rebuildMasterIndexes();refreshMasterControls();return true;
+  }catch(error){toast(error.message||'Master data gagal dimuat.',false);return false;}
+}
+
+
+function teacherSubjectOptions(){return [...new Set(String(teachers.find(t=>t.id===account?.id)?.subject??account?.subject??'').split(/[;&]/).map(s=>s.trim()).filter(Boolean))]}
+function subjectLabel(value){return value||'Belum ditentukan (data lama)'}
+function refreshSubjectControls(){
+ const options=teacherSubjectOptions();
+ for(const id of ['g-subject','journal-subject']){
+  const select=$(id),old=select.value;
+  const current=id==='journal-subject'&&editingJournalId&&old?[...new Set([...options,old])]:options;
+  setSelectOptions(select,current,'Pilih mapel');
+  if(!select.value&&options.length===1)select.value=options[0];
+ }
+ setSelectOptions($('journal-class'),classes,'Pilih kelas');
+}
+function refreshMasterControls(){
+  refreshSubjectControls();
+  setSelectOptions($('g-class'),teacherClasses,'Pilih kelas');
+  if(!$('g-class').value&&teacherClasses[0])$('g-class').value=teacherClasses[0];
+  populateClassSelect('a-class',$('a-level').value,'Pilih Kelas');
+  populateClassSelect('student-class',$('student-level').value,'Pilih Kelas');
+  populateClassSelect('matrix-class','', 'Semua Kelas');
+  const chosen=$('teacher-account').value;
+  $('teacher-account').innerHTML='<option value="">Pilih akun guru</option>'+teachers.map(t=>`<option value="${esc(t.id)}">${esc(t.id)} — ${esc(t.name)}</option>`).join('');
+  if(teachers.some(t=>t.id===chosen))$('teacher-account').value=chosen;
+  $('academic-year-label').textContent=`${APP_CONFIG.academicYear} · Semester ${APP_CONFIG.semester}`;
+  const sem=$('a-semester').value||String(APP_CONFIG.semester);
+  $('a-semester').innerHTML=[1,2].map(n=>`<option value="${n}">Semester ${n} · ${esc(APP_CONFIG.academicYear)}</option>`).join('');$('a-semester').value=sem;
+  const old=$('teacher-semester').value;
+  $('teacher-semester').innerHTML=[1,2].map(n=>`<option value="${APP_CONFIG.academicYearStart}-${n}">Semester ${n} · ${esc(APP_CONFIG.academicYear)}</option>`).join('');
+  if([...$('teacher-semester').options].some(o=>o.value===old))$('teacher-semester').value=old;else $('teacher-semester').value=`${APP_CONFIG.academicYearStart}-${APP_CONFIG.semester}`;
+}
+
+const dataGateway={
+  backend(){return window.absensiBackend?.data||null},
+  sdk(){return window.dataSdk||null},
+  available(action){const b=this.backend(),s=this.sdk();return typeof b?.[action]==='function'||typeof s?.[action]==='function'},
+  async init(handler){
+    const b=this.backend(),s=this.sdk();
+    if(typeof b?.init==='function')return b.init(handler);
+    if(typeof s?.init==='function')return s.init(handler);
+    return {isOk:false,error:{message:'Layanan data tidak tersedia'}};
+  },
+  async create(payload){const b=this.backend(),s=this.sdk();if(typeof b?.create==='function')return b.create(payload);if(typeof s?.create==='function')return s.create(payload);throw Error('Method create tidak tersedia.')},
+  async update(record){const b=this.backend(),s=this.sdk();if(typeof b?.update==='function')return b.update(record);if(typeof s?.update==='function')return s.update(record);throw Error('Method update tidak tersedia.')},
+  async delete(record){const b=this.backend(),s=this.sdk();if(typeof b?.delete==='function')return b.delete(record);if(typeof s?.delete==='function')return s.delete(record);throw Error('Method delete tidak tersedia.')}
+};
+
+const authAdapter={
+  async login({role,username,password,teacherId}){
+    const backend=window.absensiBackend?.auth;
+    if(typeof backend?.login==='function')return backend.login({role,username,password,teacherId});
+    if(role==='Guru'){
+      const teacher=teachers.find(t=>t.id===teacherId);
+      if(!teacher)return {isOk:false,error:{kind:'auth',message:'Akun guru tidak valid.'}};
+      return {isOk:true,user:teacher,session:{id:newSessionId(teacher.id),mode:'demo',role:'Guru'}};
+    }
+    if(!username.trim())return {isOk:false,error:{kind:'auth',message:'Nama pengguna admin wajib diisi.'}};
+    return {isOk:true,user:{id:'ADM001',name:username.trim(),subject:'Administrasi',position:'Admin'},session:{id:newSessionId('ADM001'),mode:'demo',role:'Admin'}};
+  },
+  async logout(){
+    const backend=window.absensiBackend?.auth;
+    if(typeof backend?.logout==='function')return backend.logout({session,user:account});
+    return {isOk:true};
+  }
+};
+
+function newSessionId(ownerId){const token=typeof crypto!=='undefined'&&typeof crypto.randomUUID==='function'?crypto.randomUUID():`${Date.now()}-${Math.random().toString(36).slice(2,12)}`;return `${ownerId}-${token}`}
+function canStartSession(){if(Date.now()<sessionBlockedUntil)return false;return sessionAttempts<APP_CONFIG.maxSessionAttempts}
+function registerSessionFailure(){sessionAttempts++;if(sessionAttempts>=APP_CONFIG.maxSessionAttempts){sessionBlockedUntil=Date.now()+APP_CONFIG.lockoutMs;sessionAttempts=0}}
+function registerSessionSuccess(){sessionAttempts=0;sessionBlockedUntil=0}
+function hasRole(requiredRole){return Boolean(account&&session&&role===requiredRole)}
+function auditEvent(activity,record={}){try{window.__absensiAuditLog=window.__absensiAuditLog||[];window.__absensiAuditLog.push({activity,role,account_id:account?.id||'',at:new Date().toISOString(),record_id:record.__backendId||''});if(window.__absensiAuditLog.length>100)window.__absensiAuditLog.shift()}catch(error){}}
+function toast(message,ok=true){$('toast-text').textContent=message;const icon=$('toast').querySelector('svg');if(icon){icon.classList.toggle('text-red-600',!ok);icon.classList.toggle('text-green-600',ok)}$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),3200)}
+function validRecord(item){if(!item||typeof item!=='object')return false;const type=String(item.record_type??item.recordType??'').trim();return Boolean(type)||Boolean(attendanceDateOf(item))&&Boolean(item.status||item.student_number||item.studentNumber)}
+function mergeReturnedRecord(result){const returned=result?.data&&typeof result.data==='object'?result.data:null;if(!returned)return null;const id=returned.__backendId;if(id)records=[...safeArray(records).filter(r=>r?.__backendId!==id),returned];else records=[...safeArray(records),returned];return returned}
+
+function attendanceRows(){
+  return safeArray(records).filter(r=>{
+    if(!validRecord(r))return false;
+    const type=String(r.record_type??r.recordType??'').trim(),status=String(r.status??r.attendance_status??'').trim(),date=attendanceDateKey(r);
+    const isStudent=type==='attendance_student'||type==='student_attendance'||type==='absensi_siswa'||(!type&&Boolean(r.student_number||r.studentNumber));
+    return isStudent&&Boolean(labels[status])&&isValidDate(date);
+  }).map(r=>({...r,status:r.status??r.attendance_status,student_number:r.student_number??r.studentNumber,class_name:r.class_name??r.className,teacher_id:r.teacher_id??r.teacherId,attendance_date:attendanceDateKey(r)}));
+}
+function teacherAttendanceRecords(){return safeArray(records).filter(r=>validRecord(r)&&String(r.record_type||r.recordType||'').trim()==='attendance_teacher'&&isValidDate(attendanceDateKey(r)))}
+function getStudent(record){return students.find(s=>s.id===record.student_number)||null}
+function storedAttendance(student,date,className,teacherId=account?.id||'',subject=$('g-subject').value){return attendanceRows().find(r=>r.student_number===student.id&&attendanceDateKey(r)===date&&String(r.class_name||'')===className&&(!teacherId||String(r.teacher_id||'')===String(teacherId))&&String(r.subject||'')===subject)}
+function storedTeacherAttendance(teacherId,date){return teacherAttendanceRecords().find(r=>String(r.teacher_id??r.student_number??'')===String(teacherId)&&attendanceDateKey(r)===date)}
+function attendanceKey(studentId,date,className,teacherId=account?.id||'',subject=$('g-subject').value){return JSON.stringify([teacherId,className,date,studentId,subject])}
+function draftKey(studentId,date,className){return attendanceKey(studentId,date,className)}
+function getDraft(student,date,className){return attendanceDrafts.get(draftKey(student.id,date,className))||null}
+function ensureDraft(student,date,className){const key=draftKey(student.id,date,className);let draft=attendanceDrafts.get(key);if(!draft){const old=storedAttendance(student,date,className);draft={status:old?.status||null,note:String(old?.display_name||''),in:'',out:''};attendanceDrafts.set(key,draft)}return draft}
+function clearDraft(student,date,className){attendanceDrafts.delete(draftKey(student.id,date,className))}
+
+function setSelectOptions(select,options,placeholder){if(!select)return;const current=select.value;select.innerHTML=`<option value="">${placeholder}</option>${options.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}`;select.value=options.includes(current)?current:''}
+function classOptions(level){return level?classes.filter(c=>(masterClasses.find(x=>x.name===c)?.level||students.find(x=>x.className===c)?.level)===level):classes}
+function populateClassSelect(selectId,level,placeholder='Semua Kelas'){setSelectOptions($(selectId),classOptions(level),placeholder)}
+function semesterBounds(semester,baseYear=APP_CONFIG.academicYearStart){const n=String(semester)==='2'?2:1;if(n===1)return{start:new Date(`${baseYear}-07-01T00:00:00`),end:new Date(`${baseYear}-12-31T23:59:59`),label:`Semester 1 · ${baseYear}/${baseYear+1}`};return{start:new Date(`${baseYear+1}-01-01T00:00:00`),end:new Date(`${baseYear+1}-06-30T23:59:59`),label:`Semester 2 · ${baseYear}/${baseYear+1}`}}
+
+function menu(){
+  const items=role==='Guru'?
+    [['guru-dashboard','layout-dashboard','Dashboard Guru'],['teacher-journal','book-open-text','Jurnal Guru'],['history','history','Riwayat Absensi'],['profile','user-round','Profil']]:
+    [['admin-dashboard','layout-dashboard','Dashboard Monitoring'],['teacher-journal','book-open-text','Jurnal Guru'],['teacher-attendance','clipboard-clock','Rekapan Guru'],['students','users-round','Data Siswa'],['teachers','contact-round','Data Guru'],['history','search','Riwayat Absensi'],['user-management','key-round','Akun Guru'],['admin-tools','file-down','Rekap & Pengaturan']];
+  $('menu').innerHTML=items.map(item=>`<button type="button" class="nav ${item[0]===activePage?'active':''}" data-page="${item[0]}"><i data-lucide="${item[1]}" class="w-4"></i>${item[2]}</button>`).join('');
+  if(role==='Admin')$('menu').innerHTML+='<a href="/master-admin.html" class="nav"><i data-lucide="graduation-cap" class="w-4"></i>Manajemen Akademik</a>';
+  lucide.createIcons();
+}
+function show(page){
+  const allowed=role==='Guru'?['guru-dashboard','teacher-journal','history','profile']:['admin-dashboard','teacher-journal','teacher-attendance','students','teachers','history','user-management','admin-tools'];
+  activePage=allowed.includes(page)?page:(role==='Guru'?'guru-dashboard':'admin-dashboard');lastFeature=activePage;
+  document.querySelectorAll('.page').forEach(el=>el.classList.toggle('hidden',el.id!==activePage));
+  const titles={'guru-dashboard':'Dashboard Guru','admin-dashboard':'Dashboard Monitoring','teacher-journal':'Jurnal Guru','teacher-attendance':'Rekapan Guru','students':'Data Siswa','teachers':'Data Guru','history':'Riwayat Absensi','profile':'Profil Guru','user-management':'Manajemen Akun Guru','admin-tools':'Rekap & Pengaturan'};
+  $('header-title').textContent=titles[activePage]||'Sekolah Absenku';$('sidebar').classList.remove('open');menu();renderActive();
+}
+function renderActive(){try{if(activePage==='guru-dashboard')renderGuru();else if(activePage==='teacher-journal')renderJournal();else if(activePage==='admin-dashboard')renderAdmin();else if(activePage==='teacher-attendance')renderTeacherAttendance();else if(activePage==='students')renderStudents();else if(activePage==='teachers')renderTeachers();else if(activePage==='history')renderHistory();else if(activePage==='profile')renderProfile();else if(activePage==='user-management')renderUserManagement()}catch(error){try{window.__absensiLastRenderError=String(error?.message||error)}catch(_){}showError()}}
+function showError(){activePage='error-page';document.querySelectorAll('.page').forEach(el=>el.classList.toggle('hidden',el.id!=='error-page'));$('header-title').textContent='Kendala Aplikasi';menu()}
+
+function adminApi(){return window.absensiBackend?.admin||null}
+async function loadTeacherUserAccounts(force=false){
+  if(role!=='Admin'||teacherUsersLoading||(!force&&teacherUsersLoaded))return;
+  const api=adminApi();if(typeof api?.listTeacherUsers!=='function'){teacherUserRows=[];teacherUsersLoaded=true;renderUserManagement();return}
+  teacherUsersLoading=true;renderUserManagement();
+  try{const result=await api.listTeacherUsers();if(!result?.isOk)throw Error(result?.error?.message||'Tidak dapat membaca akun guru.');teacherUserRows=safeArray(result.teachers);teacherUsersLoaded=true}
+  catch(error){teacherUsersLoaded=false;toast(error.message||'Tidak dapat membaca akun guru.',false)}
+  finally{teacherUsersLoading=false;renderUserManagement()}
+}
+function renderUserManagement(){
+  if(role!=='Admin')return;
+  const total=teacherUserRows.length,created=teacherUserRows.filter(x=>x.username).length,active=teacherUserRows.filter(x=>x.username&&Number(x.user_active)===1).length,missing=Math.max(0,total-created);
+  $('teacher-user-summary').innerHTML=[['Guru aktif',total],['Sudah punya akun',created],['Akun aktif',active],['Belum punya akun',missing]].map(x=>`<article class="card p-4"><p class="text-xs text-slate-500">${x[0]}</p><strong class="text-2xl">${x[1]}</strong></article>`).join('');
+  if(teacherUsersLoading){$('teacher-user-list').innerHTML='<tr><td colspan="6" class="py-8 text-center text-slate-500">Memuat data akun…</td></tr>';return}
+  if(!teacherUsersLoaded){$('teacher-user-list').innerHTML='<tr><td colspan="6" class="py-8 text-center text-slate-500">Data akun belum dimuat.</td></tr>';loadTeacherUserAccounts();return}
+  $('teacher-user-list').innerHTML=teacherUserRows.length?teacherUserRows.map((x,i)=>{const has=Boolean(x.username),isActive=has&&Number(x.user_active)===1;return `<tr><td>${i+1}</td><td class="font-semibold">${esc(x.id)}</td><td>${esc(x.name)}</td><td>${has?esc(x.username):'<span class="text-slate-400">Belum dibuat</span>'}</td><td><span class="badge ${isActive?'S':'N'}">${has?(isActive?'Aktif':'Nonaktif'):'Belum ada'}</span></td><td><div class="flex flex-wrap gap-2"><button type="button" class="teacher-user-edit rounded-lg border border-blue-300 px-2 py-1 font-bold text-blue-700" data-id="${esc(x.id)}">${has?'Reset Password':'Buat Akun'}</button>${has?`<button type="button" class="teacher-user-toggle rounded-lg border border-slate-300 px-2 py-1 font-bold" data-id="${esc(x.id)}" data-active="${isActive?'0':'1'}">${isActive?'Nonaktifkan':'Aktifkan'}</button>`:''}</div></td></tr>`}).join(''):'<tr><td colspan="6" class="py-8 text-center text-slate-500">Tidak ada data guru aktif.</td></tr>';
+}
+function randomTeacherPassword(){const bytes=crypto.getRandomValues(new Uint8Array(9));return 'Ds-'+Array.from(bytes,b=>(b%36).toString(36)).join('')}
+function openTeacherUserModal(teacherId){const row=teacherUserRows.find(x=>String(x.id)===String(teacherId));if(!row)return;$('teacher-user-id').value=row.id;$('teacher-user-person').textContent=`${row.id} · ${row.name}`;$('teacher-user-username').value=row.username||String(row.id).toLowerCase();$('teacher-user-password').value=randomTeacherPassword();$('teacher-user-form-status').textContent='';$('teacher-user-modal-title').textContent=row.username?'Reset Password Guru':'Buat Akun Guru';$('teacher-user-modal').classList.remove('hidden');lucide.createIcons();$('teacher-user-username').focus()}
+function closeTeacherUserModal(){$('teacher-user-modal').classList.add('hidden');$('teacher-user-form').reset();$('teacher-user-form-status').textContent=''}
+async function saveTeacherUserFromAdmin(event){event.preventDefault();if(busy)return;const api=adminApi();if(typeof api?.saveTeacherUser!=='function')return toast('API manajemen akun belum tersedia.',false);const teacherId=$('teacher-user-id').value,username=$('teacher-user-username').value.trim(),password=$('teacher-user-password').value;if(password.length<10)return toast('Password minimal 10 karakter.',false);busy=true;$('save-teacher-user').disabled=true;$('teacher-user-form-status').textContent='Menyimpan…';try{const result=await api.saveTeacherUser({teacherId,username,password});if(!result?.isOk)throw Error(result?.error?.message||'Gagal menyimpan akun.');closeTeacherUserModal();teacherUsersLoaded=false;await loadTeacherUserAccounts(true);toast('Akun guru berhasil disimpan.')}catch(error){$('teacher-user-form-status').textContent=error.message||'Gagal menyimpan akun.';toast(error.message||'Gagal menyimpan akun.',false)}finally{busy=false;$('save-teacher-user').disabled=false}}
+async function toggleTeacherUser(teacherId,active){if(busy)return;const api=adminApi();if(typeof api?.setTeacherUserActive!=='function')return toast('API manajemen akun belum tersedia.',false);const row=teacherUserRows.find(x=>String(x.id)===String(teacherId));const action=active?'mengaktifkan':'menonaktifkan';if(!confirm(`Yakin ingin ${action} akun ${row?.name||teacherId}?`))return;busy=true;try{const result=await api.setTeacherUserActive(teacherId,active);if(!result?.isOk)throw Error(result?.error?.message||'Gagal mengubah status akun.');teacherUsersLoaded=false;await loadTeacherUserAccounts(true);toast(`Akun guru berhasil ${active?'diaktifkan':'dinonaktifkan'}.`)}catch(error){toast(error.message||'Gagal mengubah status akun.',false)}finally{busy=false}}
+async function bulkCreateTeacherUsers(){if(busy)return;const missing=teacherUserRows.filter(x=>!x.username).length;if(!missing)return toast('Semua guru sudah mempunyai akun.');if(!confirm(`Buat akun untuk ${missing} guru yang belum mempunyai akun? Username dibuat dari ID guru dan setiap guru mendapat password sementara berbeda.`))return;const api=adminApi();if(typeof api?.bulkCreateTeacherUsers!=='function')return toast('API pembuatan akun massal belum tersedia.',false);busy=true;$('bulk-create-teacher-users').disabled=true;$('bulk-create-teacher-users').textContent='Membuat akun…';try{const result=await api.bulkCreateTeacherUsers();if(!result?.isOk)throw Error(result?.error?.message||'Pembuatan akun massal gagal.');bulkUserCredentials=safeArray(result.credentials);teacherUsersLoaded=false;await loadTeacherUserAccounts(true);if(bulkUserCredentials.length){$('bulk-user-credentials').innerHTML=bulkUserCredentials.map(x=>`<tr><td>${esc(x.teacherId)}</td><td>${esc(x.name)}</td><td>${esc(x.username)}</td><td class="font-mono font-semibold">${esc(x.password)}</td></tr>`).join('');$('bulk-user-modal').classList.remove('hidden');lucide.createIcons()}else toast('Tidak ada akun baru yang perlu dibuat.');}catch(error){toast(error.message||'Pembuatan akun massal gagal.',false)}finally{busy=false;$('bulk-create-teacher-users').disabled=false;$('bulk-create-teacher-users').textContent='Buat Semua Akun yang Belum Ada'}}
+function downloadBulkUserCredentials(){if(!bulkUserCredentials.length)return;const rows=[['ID Guru','Nama Guru','Username','Password Sementara'],...bulkUserCredentials.map(x=>[x.teacherId,x.name,x.username,x.password])];const csv='\ufeff'+rows.map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`akun-guru-${isoToday()}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function closeBulkUserModal(){$('bulk-user-modal').classList.add('hidden');bulkUserCredentials=[];$('bulk-user-credentials').innerHTML=''}
+
+function syncTeacherSessionFromStored(){
+  if(role!=='Guru'||!account||attendanceSession.dirty)return;
+  const record=storedTeacherAttendance(account.id,isoToday());
+  if(!record){attendanceSession={teacherId:account.id,recordId:'',checkInTime:'',checkOutTime:'',dirty:false};return}
+  const [checkInTime='',checkOutTime='']=String(record.check_in_time||'|').split('|');
+  attendanceSession={teacherId:account.id,recordId:record.__backendId||'',checkInTime:validTeacherTime(checkInTime)?checkInTime:'',checkOutTime:validTeacherTime(checkOutTime)?checkOutTime:'',dirty:false};
+}
+function renderGuru(){
+  if(!account)return;syncTeacherSessionFromStored();
+  const date=isValidDate($('g-date').value)?$('g-date').value:isoToday();if($('g-date').value!==date)$('g-date').value=date;
+  const className=teacherClasses.includes($('g-class').value)?$('g-class').value:(teacherClasses[0]||'');$('g-class').value=className;
+  const chosenSubject=$('g-subject').value,hasSubject=teacherSubjectOptions().includes(chosenSubject);
+  const list=hasSubject?students.filter(s=>s.className===className):[];
+  $('g-subject').disabled=busy;$('g-class').disabled=busy;$('g-date').disabled=busy;
+  $('all-present').disabled=busy||!hasSubject;$('save-class').disabled=busy||!hasSubject;
+  $('input-by').textContent=`${account.name} (${account.id})`;
+  $('class-note').textContent=hasSubject?`Absensi ${chosenSubject} · ${account.name}. Status dan draf disimpan terpisah untuk setiap mapel. Pilih mapel lain untuk pertemuan berikutnya.`:teacherSubjectOptions().length?'Pilih mata pelajaran sebelum mengisi absensi siswa.':'Belum ada mapel terdaftar. Hubungi Admin untuk melengkapi data guru.';
+  const completed=list.filter(s=>Boolean(getDraft(s,date,className)?.status||storedAttendance(s,date,className)?.status)).length;
+  $('checkin-status').textContent=attendanceSession.checkInTime?`Jam masuk ${attendanceSession.checkInTime}${attendanceSession.checkOutTime?` · Jam keluar ${attendanceSession.checkOutTime}`:''}`:'Jam belum diisi';
+  $('teacher-in-time').value=attendanceSession.checkInTime||'';$('teacher-out-time').value=attendanceSession.checkOutTime||'';
+  $('guru-stats').innerHTML=[['Jumlah siswa',list.length],['Sudah diinput',completed],['Belum diinput',Math.max(0,list.length-completed)]].map(item=>`<article class="card p-4"><p class="text-xs text-slate-500">${item[0]}</p><strong class="text-2xl">${item[1]}</strong></article>`).join('');
+  $('guru-rows').innerHTML=list.length?list.map(s=>{
+    const old=storedAttendance(s,date,className,account.id),draft=getDraft(s,date,className),value=draft?.status||old?.status||'';
+    const state=saveStates.get(attendanceKey(s.id,date,className,account.id)),saved=Boolean(old)||state==='saved';
+    const statusLabel=state==='saving'?'Menyimpan…':saved?`Tersimpan oleh ${account.name}`:'Belum tersimpan';
+    const statusClass=state==='saving'?'S':saved?'H':'N',note=draft?.note??old?.display_name??'';
+    return `<tr><td><strong>${esc(s.name)}</strong><br><span class="text-slate-500">${esc(s.displayId||'NIS belum tersedia')}</span></td><td>${esc(s.className)}</td><td><div class="flex gap-1">${Object.keys(labels).map(key=>`<button type="button" class="status-btn ${value===key?'selected':''}" data-student="${esc(s.id)}" data-status="${key}" aria-label="${labels[key]} untuk ${esc(s.name)}">${key}</button>`).join('')}</div></td><td><input class="field p-1 min-w-36" data-note="${esc(s.id)}" maxlength="250" placeholder="Keterangan (opsional)" value="${esc(note)}"></td><td><span class="badge ${statusClass}">${esc(statusLabel)}</span></td></tr>`;
+  }).join(''):`<tr><td colspan="5" class="py-9 text-center text-slate-500">${hasSubject?'Belum ada siswa untuk kelas ini.':'Pilih mata pelajaran terlebih dahulu.'}</td></tr>`;
+}
+
+function getPeriodBounds(){
+  const period=$('a-period').value||'weekly',today=new Date(`${isoToday()}T00:00:00`);
+  if(period==='weekly'){const offset=(today.getDay()+6)%7,start=new Date(today);start.setDate(today.getDate()-offset);const end=new Date(start);end.setDate(start.getDate()+6);return{period,start,end,label:`${start.toLocaleDateString('id-ID')} – ${end.toLocaleDateString('id-ID')}`}}
+  if(period==='monthly'){const month=$('a-month').value||String(today.getMonth()+1).padStart(2,'0'),year=Number($('a-year').value)||today.getFullYear();return{period,month,year,label:new Date(year,Number(month)-1,1).toLocaleDateString('id-ID',{month:'long',year:'numeric'})}}
+  const semester=$('a-semester').value||'1',bounds=semesterBounds(semester);return{period,semester,...bounds};
+}
+function adminRows(){
+  const bounds=getPeriodBounds(),level=$('a-level').value||'',className=$('a-class').value||'',subject=$('a-subject').value;
+  return attendanceRows().filter(r=>{const key=attendanceDateKey(r),date=new Date(`${key}T00:00:00`),student=getStudent(r),actualLevel=student?.level||(String(r.class_name).includes('MA')?'MA':String(r.class_name).includes('SMP')?'SMP':'SD');const inPeriod=key&&(bounds.period==='monthly'?key.slice(0,7)===`${bounds.year}-${bounds.month}`:date>=bounds.start&&date<=bounds.end);return inPeriod&&(!level||actualLevel===level)&&(!className||r.class_name===className)&&(!subject||subjectLabel(r.subject)===subject)});
+}
+function renderAdmin(){
+  setSelectOptions($('a-subject'),[...new Set(attendanceRows().map(r=>subjectLabel(r.subject)))].sort(),'Semua mapel');
+  const period=$('a-period').value||'weekly';$('month-filter-wrap').classList.toggle('hidden',period!=='monthly');$('year-filter-wrap').classList.toggle('hidden',period!=='monthly');$('semester-filter-wrap').classList.toggle('hidden',period!=='semester');
+  const rows=adminRows(),counts=Object.fromEntries(Object.keys(labels).map(k=>[k,rows.filter(r=>r.status===k).length])),total=rows.length,percent=total?Math.round(counts.H/total*100):0,bounds=getPeriodBounds();
+  $('daily-report-wrap').classList.toggle('hidden',period!=='monthly');
+  if(period==='monthly'){const days=new Date(bounds.year,Number(bounds.month),0).getDate();$('daily-report-rows').innerHTML=Array.from({length:days},(_,i)=>{const key=`${bounds.year}-${bounds.month}-${String(i+1).padStart(2,'0')}`,daily=rows.filter(r=>attendanceDateKey(r)===key),n=Object.fromEntries(Object.keys(labels).map(s=>[s,daily.filter(r=>r.status===s).length]));return `<tr><td>${key}</td><td>${n.H}</td><td>${daily.filter(r=>/terlambat/i.test(String(r.display_name||''))).length}</td><td>${n.I}</td><td>${n.S}</td><td>${n.A}</td><td>${daily.length}</td></tr>`}).join('')}
+  $('filter-summary').textContent=`Periode: ${bounds.label} · ${$('a-level').value||'Semua jenjang'} · ${$('a-class').value||'Semua kelas'} · ${$('a-subject').value||'Semua mapel'}`;
+  $('kpis').innerHTML=[['Catatan tersimpan',total],['Hadir',counts.H],['Sakit',counts.S],['Izin',counts.I],['% Hadir',`${percent}%`]].map(item=>`<article class="card p-4"><p class="text-xs text-slate-500">${item[0]}</p><strong class="text-2xl">${item[1]}</strong><p class="text-[10px] text-slate-400 mt-2">Catatan absensi per mapel</p></article>`).join('');
+  const max=Math.max(...Object.values(counts),1);$('bars').innerHTML=Object.keys(labels).map(key=>`<div><div class="flex justify-between text-xs mb-1"><span class="font-bold">${key} · ${labels[key]}</span><span>${counts[key]}</span></div><div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bar" style="width:${Math.max(0,counts[key]/max*100)}%;background:${({H:'#24a168',S:'#3b82f6',I:'#d39a17',A:'#d45b5b',D:'#7c3aed'})[key]}"></div></div></div>`).join('');
+  const latest=[...rows].sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||''))).slice(0,6);$('activities').innerHTML=latest.length?latest.map(r=>`<div class="border-b border-slate-100 pb-3"><strong class="text-sm">${esc(r.input_by||r.teacher_name||'Petugas')}</strong><p class="text-xs text-slate-500">${esc(attendanceDateKey(r))} · ${esc(r.class_name)} · ${esc(subjectLabel(r.subject))} · ${esc(r.student_name)} · <span class="font-bold">${esc(r.status)}</span></p></div>`).join(''):'<p class="text-sm text-slate-500 py-5">Belum ada catatan absensi pada filter ini.</p>';
+}
+
+function pagination(id,page,total,onChange){const el=$(id),pagesTotal=Math.max(1,Math.ceil(total/APP_CONFIG.pageSize));el.innerHTML=`<span class="text-xs text-slate-500 self-center mr-2">Halaman ${page} dari ${pagesTotal}</span><button type="button" class="border rounded-lg px-3 py-1 text-xs" data-pager="${id}" data-dir="-1" ${page<=1?'disabled':''}>Sebelumnya</button><button type="button" class="border rounded-lg px-3 py-1 text-xs" data-pager="${id}" data-dir="1" ${page>=pagesTotal?'disabled':''}>Berikutnya</button>`;el.onclick=e=>{const b=e.target.closest('[data-pager]');if(b)onChange(Math.max(1,Math.min(pagesTotal,page+Number(b.dataset.dir))))}}
+function renderStudents(){const q=$('student-search').value.trim().toLowerCase(),level=$('student-level').value||'',className=$('student-class').value||'',filtered=students.filter(s=>(!level||s.level===level)&&(!className||s.className===className)&&`${s.name} ${s.displayId}`.toLowerCase().includes(q)),totalPages=Math.max(1,Math.ceil(filtered.length/APP_CONFIG.pageSize));pages.students=Math.min(pages.students,totalPages);const view=filtered.slice((pages.students-1)*APP_CONFIG.pageSize,pages.students*APP_CONFIG.pageSize);$('student-list').innerHTML=view.length?view.map((s,i)=>`<tr><td>${(pages.students-1)*APP_CONFIG.pageSize+i+1}</td><td>${esc(s.displayId||'Belum tersedia')}</td><td class="font-semibold">${esc(s.name)}</td><td>${esc(s.level)}</td><td>${esc(s.className)}</td><td><span class="badge H">Aktif</span></td></tr>`).join(''):'<tr><td colspan="6" class="py-9 text-center text-slate-500">Tidak ada siswa yang sesuai dengan filter.</td></tr>';pagination('student-pagination',pages.students,filtered.length,p=>{pages.students=p;renderStudents()})}
+function renderTeachers(){const q=$('teacher-search').value.trim().toLowerCase(),filtered=teachers.filter(t=>`${t.id} ${t.name} ${t.subject}`.toLowerCase().includes(q)),totalPages=Math.max(1,Math.ceil(filtered.length/APP_CONFIG.pageSize));pages.teachers=Math.min(pages.teachers,totalPages);const view=filtered.slice((pages.teachers-1)*APP_CONFIG.pageSize,pages.teachers*APP_CONFIG.pageSize);$('teacher-list').innerHTML=view.length?view.map((t,i)=>`<tr><td>${(pages.teachers-1)*APP_CONFIG.pageSize+i+1}</td><td>${esc(t.id)}</td><td class="font-semibold">${esc(t.name)}</td><td>${esc(t.subject)}</td><td>${esc(t.position)}</td><td><span class="badge H">Aktif</span></td></tr>`).join(''):'<tr><td colspan="6" class="py-9 text-center text-slate-500">Tidak ada data guru.</td></tr>';pagination('teacher-pagination',pages.teachers,filtered.length,p=>{pages.teachers=p;renderTeachers()})}
+function renderHistory(){const q=$('history-search').value.trim().toLowerCase(),status=$('history-status').value||'',date=$('history-date').value||'',base=role==='Guru'?attendanceRows().filter(r=>r.teacher_id===account?.id):attendanceRows(),filtered=base.filter(r=>(!status||r.status===status)&&(!date||attendanceDateKey(r)===date)&&`${r.student_name} ${r.class_name} ${r.subject||''} ${r.input_by}`.toLowerCase().includes(q)).sort((a,b)=>String(attendanceDateKey(b)).localeCompare(String(attendanceDateKey(a)))),totalPages=Math.max(1,Math.ceil(filtered.length/APP_CONFIG.pageSize));pages.history=Math.min(pages.history,totalPages);const view=filtered.slice((pages.history-1)*APP_CONFIG.pageSize,pages.history*APP_CONFIG.pageSize);$('history-list').innerHTML=view.length?view.map(r=>`<tr><td>${esc(attendanceDateKey(r))}</td><td class="font-semibold">${esc(r.student_name)}</td><td>${esc(r.class_name||'—')}</td><td>${esc(subjectLabel(r.subject))}</td><td><span class="badge ${r.status}">${r.status} · ${labels[r.status]}</span></td><td>${esc(r.input_by||'—')}</td><td>${role==='Admin'?`<div class="flex gap-2"><button type="button" class="edit text-blue-700 font-bold text-xs" data-id="${esc(r.__backendId)}">Edit</button><button type="button" class="delete text-red-600 font-bold text-xs" data-id="${esc(r.__backendId)}">${deleteId===r.__backendId?'Konfirmasi':'Hapus'}</button></div>`:'—'}</td></tr>`).join(''):'<tr><td colspan="7" class="py-9 text-center text-slate-500">Belum ada riwayat yang sesuai.</td></tr>';pagination('history-pagination',pages.history,filtered.length,p=>{pages.history=p;renderHistory()})}
+
+function readTeacherTime(value){if(value===undefined||value===null||String(value).trim()==='')return null;const text=String(value).trim(),m=text.match(/(?:T|\s)?(\d{1,2}):(\d{2})(?::(\d{2}))?/);if(m){const h=Number(m[1]),min=Number(m[2]),sec=Number(m[3]||0);if(h<24&&min<60&&sec<60)return h*60+min+sec/60}return null}
+function formatTeacherDuration(minutes){const rounded=Math.max(0,Math.round(minutes)),hours=Math.floor(rounded/60),mins=rounded%60;return `${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}`}
+function teacherSummaryRows(){
+  const query=$('teacher-attendance-search').value.trim().toLowerCase(),period=$('teacher-period').value||'weekly';let start,end,label='';
+  if(period==='weekly'){const chosen=$('teacher-week').value||isoToday(),d=new Date(`${chosen}T00:00:00`),offset=(d.getDay()+6)%7;start=new Date(d);start.setDate(d.getDate()-offset);end=new Date(start);end.setDate(start.getDate()+6);label=`${start.toLocaleDateString('id-ID')} – ${end.toLocaleDateString('id-ID')}`}
+  else if(period==='monthly'){const value=$('teacher-month').value||isoToday().slice(0,7),[y,m]=value.split('-').map(Number);start=new Date(y,m-1,1);end=new Date(y,m,0);label=start.toLocaleDateString('id-ID',{month:'long',year:'numeric'})}
+  else{const [base,semester]=($('teacher-semester').value||`${APP_CONFIG.academicYearStart}-1`).split('-');const b=semesterBounds(semester,Number(base));start=b.start;end=b.end;label=b.label}
+  const detail=teacherAttendanceRecords().map(r=>{const date=attendanceDateKey(r),[rawIn='',rawOut='']=String(r.check_in_time||'|').split('|'),inMinutes=readTeacherTime(rawIn),outMinutes=readTeacherTime(rawOut);let durationMinutes=null;if(inMinutes!==null&&outMinutes!==null){durationMinutes=outMinutes-inMinutes;if(durationMinutes<0)durationMinutes+=1440}const display=v=>v===null?'-':`${String(Math.floor(v/60)).padStart(2,'0')}:${String(Math.floor(v%60)).padStart(2,'0')}`;return{record:r,date,id:String(r.teacher_id||r.student_number||''),name:r.teacher_name||r.student_name||'',in:display(inMinutes),out:display(outMinutes),minutes:durationMinutes??0,duration:durationMinutes===null?'-':formatTeacherDuration(durationMinutes),status:labels[r.status]||r.status||'-'}}).filter(r=>r.date&&new Date(`${r.date}T00:00:00`)>=start&&new Date(`${r.date}T00:00:00`)<=end&&(!query||r.name.toLowerCase().includes(query))).sort((a,b)=>b.date.localeCompare(a.date)||a.name.localeCompare(b.name,'id'));
+  return{detail,label};
+}
+function teacherAttendanceRows(){return teacherSummaryRows().detail}
+function renderTeacherAttendance(){const {detail,label}=teacherSummaryRows(),byTeacher=new Map();detail.forEach(r=>{const item=byTeacher.get(r.id)||{name:r.name,minutes:0,days:new Set()};item.days.add(r.date);if(r.duration!=='-')item.minutes+=r.minutes;byTeacher.set(r.id,item)});const totals=[...byTeacher.values()],minutes=totals.reduce((n,r)=>n+r.minutes,0),days=totals.reduce((n,r)=>n+r.days.size,0);$('teacher-attendance-summary').innerHTML=`<article class="card p-4"><p class="text-xs text-slate-500">Periode</p><strong class="text-xl">${esc(label)}</strong></article>`+totals.map(r=>`<article class="card p-4"><p class="text-xs text-slate-500">${esc(r.name)} · Hari mengajar ${r.days.size}</p><strong class="text-xl">${Math.floor(r.minutes/60)}j ${Math.round(r.minutes%60)}m</strong></article>`).join('')+`<article class="card p-4"><p class="text-xs text-slate-500">Total semua guru · ${days} hari mengajar</p><strong class="text-xl">${Math.floor(minutes/60)}j ${Math.round(minutes%60)}m</strong></article>`;$('teacher-attendance-list').innerHTML=detail.length?detail.map((r,i)=>`<tr><td>${i+1}</td><td class="font-semibold">${esc(r.name||r.id||'-')}</td><td>${esc(r.date)}</td><td>${esc(r.in)}</td><td>${esc(r.out)}</td><td>${esc(r.duration)}</td><td>${esc(r.status)}</td></tr>`).join(''):'<tr><td colspan="7" class="py-9 text-center text-slate-500">Belum ada data waktu kehadiran guru tersimpan pada periode ini.</td></tr>'}
+function renderProfile(){if(account)$('profile-data').innerHTML=`<strong>${esc(account.name)}</strong><br>ID Guru: ${esc(account.id)}<br>Mata Pelajaran: ${esc(account.subject||'Administrasi')}<br>Akses aktif: ${esc(role)}`}
+
+function journalRows(){return safeArray(records).filter(r=>r&&typeof r==='object'&&r.record_type==='teacher_journal'&&typeof r.__backendId==='string'&&r.__backendId.trim())}
+function journalDuration(start,end){if(!validTeacherTime(start)||!validTeacherTime(end)||end<=start)return '-';const [sh,sm]=start.split(':').map(Number),[eh,em]=end.split(':').map(Number),mins=eh*60+em-(sh*60+sm);return mins>0?`${Math.floor(mins/60)} jam ${mins%60} menit`:'-'}
+function renderJournal(){const canEdit=role==='Guru';$('journal-form').classList.toggle('hidden',!canEdit);$('journal-teacher').readOnly=canEdit;if(canEdit&&!editingJournalId)$('journal-teacher').value=account?.name||'';$('print-journal').textContent=canEdit?'Cetak / Unduh Jurnal':'Cetak Rekap Jurnal';$('journal-filters').classList.toggle('hidden',canEdit);const query=canEdit?'':$('journal-search').value.trim().toLowerCase(),from=canEdit?'':$('journal-from').value,to=canEdit?'':$('journal-to').value,rows=journalRows().filter(r=>(role==='Admin'||r.teacher_id===account?.id)&&(!query||String(r.teacher_name||'').toLowerCase().includes(query))&&(!from||r.attendance_date>=from)&&(!to||r.attendance_date<=to)).sort((a,b)=>String(b.attendance_date).localeCompare(String(a.attendance_date)));$('journal-duration').value=journalDuration($('journal-start').value,$('journal-end').value);$('journal-list').innerHTML=rows.length?rows.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.teacher_name)}</td><td>${esc(r.attendance_date)}</td><td>${esc(subjectLabel(r.subject))}</td><td>${esc(r.class_name||'Belum ditentukan')}</td><td>${esc(r.journal_material)}</td><td>${esc(`${r.teaching_start||'-'}–${r.teaching_end||'-'}`)}</td><td>${esc(journalDuration(r.teaching_start,r.teaching_end))}</td><td>${esc(r.teaching_challenges||'-')}</td><td>${role==='Guru'?`<button type="button" class="edit-journal text-blue-700 font-bold text-xs" data-id="${esc(r.__backendId)}">Edit</button> <button type="button" class="delete-journal text-red-600 font-bold text-xs" data-id="${esc(r.__backendId)}">Hapus</button>`:'Monitoring'}</td></tr>`).join(''):'<tr><td colspan="10" class="py-9 text-center text-slate-500">Belum ada jurnal.</td></tr>'}
+function resetJournalForm(){editingJournalId='';$('journal-form').reset();refreshSubjectControls();$('journal-teacher').value=account?.name||'';$('journal-date').value=isoToday();$('cancel-journal-edit').classList.add('hidden');$('save-journal').textContent='Simpan Jurnal'}
+async function saveJournal(event){event.preventDefault();if(role!=='Guru'||busy)return;const subject=$('journal-subject').value,className=$('journal-class').value;if(!subject||!className){toast('Pilih mapel dan kelas untuk jurnal.',false);return}const name=account?.name||'',date=$('journal-date').value,material=$('journal-material').value.trim(),start=$('journal-start').value,end=$('journal-end').value;if(!name||!isValidDate(date)||!material||!validTimeOrder(start,end)||start===end){toast('Isi tanggal, materi, serta jam mengajar yang valid. Jam selesai harus setelah jam mulai.',false);return}busy=true;$('save-journal').disabled=true;const current=journalRows().find(r=>r.__backendId===editingJournalId),payload={record_type:'teacher_journal',subject,class_name:className,teacher_id:account.id,teacher_name:account.name,attendance_date:date,journal_material:material,teaching_start:start,teaching_end:end,teaching_duration:journalDuration(start,end),teaching_challenges:$('journal-challenges').value.trim(),created_at:new Date().toISOString()};try{const result=current?await dataGateway.update({...current,...payload}):await dataGateway.create(payload);if(!result?.isOk)throw Error(result?.error?.message||'Penyimpanan jurnal gagal.');mergeReturnedRecord(result);resetJournalForm();renderJournal();toast('Jurnal berhasil disimpan.')}catch(error){toast(error.message||'Penyimpanan jurnal gagal.',false)}finally{busy=false;$('save-journal').disabled=false}}
+function editJournal(id){const r=journalRows().find(x=>x.__backendId===id);if(!r||role!=='Guru'||r.teacher_id!==account?.id)return;editingJournalId=id;refreshSubjectControls();for(const [id,value] of [['journal-subject',r.subject],['journal-class',r.class_name]]){if(value&&!Array.from($(id).options).some(o=>o.value===value))$(id).add(new Option(value,value));$(id).value=value||'';}[['journal-teacher','teacher_name'],['journal-date','attendance_date'],['journal-material','journal_material'],['journal-start','teaching_start'],['journal-end','teaching_end'],['journal-challenges','teaching_challenges']].forEach(([a,b])=>$(a).value=r[b]||'');$('cancel-journal-edit').classList.remove('hidden');$('save-journal').textContent='Simpan Perubahan';$('journal-duration').value=journalDuration(r.teaching_start,r.teaching_end)}
+async function deleteJournal(id){const r=journalRows().find(x=>x.__backendId===id);if(!r||role!=='Guru'||r.teacher_id!==account?.id||busy)return;busy=true;try{const result=await dataGateway.delete(r);if(!result?.isOk)throw Error(result?.error?.message||'Jurnal gagal dihapus.');records=records.filter(x=>x.__backendId!==id);renderJournal();toast('Jurnal dihapus.')}catch(error){toast(error.message||'Jurnal gagal dihapus.',false)}finally{busy=false}}
+function printJournal(){const table=$('journal-list').closest('table')?.outerHTML||'<p>Belum ada jurnal.</p>',win=window.open('','_blank');if(!win){toast('Izinkan pop-up untuk mencetak jurnal.',false);return}win.document.write(`<html lang="id"><head><meta charset="UTF-8"><title>Jurnal Guru</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#17324d}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #bbb;padding:7px;text-align:left}th{background:#eef4f8}</style></head><body><h1>Jurnal Guru</h1>${table}<script>window.onload=()=>window.print()<\/script></body></html>`);win.document.close()}
+
+const STUDENT_FIELDS=['record_type','attendance_date','student_number','student_name','class_name','status','check_in_time','display_name','teacher_id','teacher_name','subject','input_by','created_at'];
+function sanitizeFields(values,fields,includeId=false){const payload={};if(includeId&&typeof values?.__backendId==='string'&&values.__backendId.trim())payload.__backendId=values.__backendId;fields.forEach(field=>{const value=values?.[field];if(value===undefined||value===null||typeof value==='object'||typeof value==='function')return;if(typeof value==='number'&&!Number.isFinite(value))return;if(typeof value==='string'&&!value.trim())return;payload[field]=value});return payload}
+function buildStudentAttendancePayload(student,status,date,className,details={}){const payload=sanitizeFields({record_type:'attendance_student',attendance_date:date,student_number:student.id,student_name:student.name,class_name:className,status,check_in_time:details.in||details.out?`${details.in||''}|${details.out||''}`:'',display_name:String(details.note||'').trim(),teacher_id:account.id,teacher_name:account.name,subject:$('g-subject').value,input_by:`${account.name} (${account.id})`,created_at:new Date().toISOString()},STUDENT_FIELDS);payload.display_name=String(details.note||'').trim();return payload}
+async function waitForStoredAttendance(student,date,className,expectedStatus){const deadline=Date.now()+2000;while(Date.now()<deadline){const r=storedAttendance(student,date,className);if(r&&(!expectedStatus||r.status===expectedStatus))return true;await new Promise(resolve=>setTimeout(resolve,100))}return Boolean(storedAttendance(student,date,className))}
+async function saveAttendance(){
+  if(busy||role!=='Guru')return;if(!teacherSubjectOptions().includes($('g-subject').value)){toast('Pilih mapel terlebih dahulu.',false);return}const date=$('g-date').value,className=$('g-class').value;if(!isValidDate(date)||!teacherClasses.includes(className)){toast('Tanggal atau kelas tidak valid.',false);return}
+  const selected=students.filter(s=>s.className===className&&labels[getDraft(s,date,className)?.status]);if(!selected.length){toast('Ubah atau pilih minimal satu status siswa terlebih dahulu.',false);return}
+  if(!dataGateway.available('create')){toast('Layanan penyimpanan belum tersedia.',false);return}
+  busy=true;$('save-class').disabled=true;$('save-class').textContent='Menyimpan...';let savedCount=0,failedCount=0,lastError='';
+  try{
+    for(const student of selected){const draft=getDraft(student,date,className);if(!draft||!labels[draft.status])continue;const old=storedAttendance(student,date,className,account.id),key=attendanceKey(student.id,date,className,account.id);saveStates.set(key,'saving');renderGuru();const payload=buildStudentAttendancePayload(student,draft.status,date,className,draft);try{const result=old?await dataGateway.update({...payload,__backendId:old.__backendId}):await dataGateway.create(payload);if(!result?.isOk)throw Error(result?.error?.message||'Penyimpanan ditolak.');mergeReturnedRecord(result);const verified=await waitForStoredAttendance(student,date,className,draft.status);if(!verified&&result.data==null)throw Error('Data terkirim tetapi belum dapat diverifikasi.');saveStates.set(key,'saved');savedCount++;clearDraft(student,date,className)}catch(error){saveStates.delete(key);failedCount++;lastError=error.message||'Penyimpanan gagal.'}renderGuru()}
+  }finally{busy=false;$('save-class').textContent='Simpan Absensi';renderGuru()}
+  toast(failedCount?`${savedCount} tersimpan, ${failedCount} gagal. ${lastError}`:`${savedCount} record absensi berhasil disimpan.`,failedCount===0);
+}
+
+async function saveTeacherTime(){
+  if(busy||role!=='Guru'||!account)return;const date=isoToday(),checkInTime=$('teacher-in-time').value,checkOutTime=$('teacher-out-time').value;if(!validTeacherTime(checkInTime)||!validTeacherTime(checkOutTime)||!validTimeOrder(checkInTime,checkOutTime)){toast('Jam masuk dan jam keluar wajib valid. Jam keluar tidak boleh lebih awal.',false);return}
+  const old=storedTeacherAttendance(account.id,date),payload=sanitizeFields({record_type:'attendance_teacher',attendance_date:date,student_name:account.name,student_number:account.id,status:'H',check_in_time:`${checkInTime}|${checkOutTime}`,display_name:'Kehadiran guru',teacher_id:account.id,teacher_name:account.name,subject:account.subject||'Administrasi',input_by:account.name,created_at:new Date().toISOString()},STUDENT_FIELDS);
+  busy=true;$('save-teacher-time').disabled=true;$('save-teacher-time').textContent='Menyimpan…';
+  try{const result=old?await dataGateway.update({...payload,__backendId:old.__backendId}):await dataGateway.create(payload);if(!result?.isOk)throw Error(result?.error?.message||'Penyimpanan waktu guru gagal.');const returned=mergeReturnedRecord(result);attendanceSession={teacherId:account.id,recordId:returned?.__backendId||old?.__backendId||'',checkInTime,checkOutTime,dirty:false};renderGuru();toast('Jam masuk dan jam keluar berhasil disimpan.')}catch(error){toast(error.message||'Penyimpanan waktu guru gagal.',false)}finally{busy=false;$('save-teacher-time').disabled=false;$('save-teacher-time').textContent='Simpan Jam'}
+}
+
+function openEdit(id){const record=attendanceRows().find(r=>r.__backendId===id);if(!record)return;activeEdit=record;$('edit-id').value=id;$('edit-person').textContent=`${record.student_name} · ${record.class_name}`;$('edit-date').value=attendanceDateKey(record);$('edit-status').value=record.status;const [a='',b='']=String(record.check_in_time||'|').split('|');$('edit-in').value=a;$('edit-out').value=b;$('edit-note').value=record.display_name||'';$('edit-error').classList.add('hidden');$('edit-modal').classList.remove('hidden');lucide.createIcons();$('edit-date').focus()}
+function closeEdit(){$('edit-modal').classList.add('hidden');activeEdit=null}
+async function saveEdit(event){event.preventDefault();if(!hasRole('Admin')||!activeEdit||busy)return;const date=$('edit-date').value,status=$('edit-status').value;if(!isValidDate(date)||!labels[status]){$('edit-error').textContent='Tanggal dan status absensi wajib valid.';$('edit-error').classList.remove('hidden');return}const duplicate=attendanceRows().find(r=>r.__backendId!==activeEdit.__backendId&&r.student_number===activeEdit.student_number&&attendanceDateKey(r)===date&&r.class_name===activeEdit.class_name&&String(r.teacher_id||'')===String(activeEdit.teacher_id||''));if(duplicate){$('edit-error').textContent='Absensi siswa oleh guru yang sama pada kelas dan tanggal tersebut sudah ada.';$('edit-error').classList.remove('hidden');return}busy=true;$('save-edit').disabled=true;$('save-edit').textContent='Menyimpan...';try{const payload=sanitizeFields({...activeEdit,attendance_date:date,status,check_in_time:`${$('edit-in').value||''}|${$('edit-out').value||''}`,display_name:$('edit-note').value.trim(),created_at:new Date().toISOString()},STUDENT_FIELDS,true),result=await dataGateway.update(payload);if(!result?.isOk)throw Error(result?.error?.message||'Perubahan gagal disimpan.');mergeReturnedRecord(result);auditEvent('attendance_updated',activeEdit);closeEdit();renderHistory();toast('Absensi berhasil diperbarui.')}catch(error){$('edit-error').textContent=error.message||'Terjadi kendala. Silakan coba lagi.';$('edit-error').classList.remove('hidden')}finally{busy=false;$('save-edit').disabled=false;$('save-edit').textContent='Simpan Perubahan'}}
+async function deleteRecord(id){if(!hasRole('Admin')||busy)return;if(deleteId!==id){deleteId=id;renderHistory();clearTimeout(deleteRecord.timer);deleteRecord.timer=setTimeout(()=>{deleteId='';if(activePage==='history')renderHistory()},3500);return}const record=attendanceRows().find(r=>r.__backendId===id);if(!record)return;busy=true;try{const result=await dataGateway.delete(record);if(!result?.isOk)throw Error(result?.error?.message||'Penghapusan gagal.');records=records.filter(r=>r.__backendId!==id);auditEvent('attendance_deleted',record);deleteId='';renderHistory();toast('Catatan absensi dihapus.')}catch(error){toast(error.message||'Penghapusan gagal.',false)}finally{busy=false}}
+
+function openResetAll(){if(!hasRole('Admin')||busy)return;$('reset-all-confirm').value='';$('reset-all-status').textContent='';$('confirm-reset-all').disabled=true;$('reset-all-modal').classList.remove('hidden');$('reset-all-confirm').focus()}
+function closeResetAll(){if(!busy)$('reset-all-modal').classList.add('hidden')}
+async function resetAllData(event){
+  event.preventDefault();
+  if(!hasRole('Admin')||busy||$('reset-all-confirm').value!=='HAPUS SEMUA DATA')return;
+  busy=true;
+  $('confirm-reset-all').disabled=true;
+  $('cancel-reset-all').disabled=true;
+  $('reset-all-confirm').disabled=true;
+  $('reset-all-status').textContent='Menghapus absensi, kehadiran guru, jurnal, dan sesi login...';
+  try{
+    const adminBackend=window.absensiBackend?.admin;
+    if(typeof adminBackend?.resetDynamicData==='function'){
+      const result=await adminBackend.resetDynamicData('HAPUS SEMUA DATA');
+      if(!result?.isOk)throw Error(result?.error?.message||'Reset data gagal.');
+      records=[];
+      $('reset-all-status').textContent='Seluruh data operasional berhasil dihapus. Anda akan keluar dari aplikasi.';
+      toast('Absensi, kehadiran guru, jurnal, dan sesi login sudah dihapus.');
+      setTimeout(()=>window.location.reload(),900);
+      return;
+    }
+
+    const targets=safeArray(records).filter(r=>validRecord(r)&&r.__backendId);
+    let deleted=0,failed=0;
+    const failedIds=new Set();
+    for(const record of targets){
+      $('reset-all-status').textContent=`Menghapus ${deleted} dari ${targets.length} data...`;
+      try{const result=await dataGateway.delete(record);if(result?.isOk)deleted++;else{failed++;failedIds.add(record.__backendId)}}catch(error){failed++;failedIds.add(record.__backendId)}
+    }
+    records=records.filter(r=>!r.__backendId||failedIds.has(r.__backendId));
+    if(failed)throw Error(`${deleted} data dihapus, ${failed} gagal. Coba lagi.`);
+    $('reset-all-modal').classList.add('hidden');
+    toast('Seluruh data dinamis sudah dihapus.');
+    renderActive();
+  }catch(error){
+    $('reset-all-status').textContent=error.message||'Reset data gagal.';
+    $('reset-all-confirm').disabled=false;
+    $('reset-all-confirm').value='';
+    toast(error.message||'Reset data gagal.',false);
+  }finally{
+    busy=false;
+    $('cancel-reset-all').disabled=false;
+    $('confirm-reset-all').disabled=true;
+  }
+}
+
+function openMatrixPreview(){const month=$('a-month').value||String(new Date().getMonth()+1).padStart(2,'0'),year=$('a-year').value||String(new Date().getFullYear());$('matrix-month').innerHTML=Array.from({length:12},(_,i)=>{const value=String(i+1).padStart(2,'0');return `<option value="${value}">${new Date(Number(year),i,1).toLocaleDateString('id-ID',{month:'long'})}</option>`}).join('');$('matrix-year').innerHTML=Array.from({length:11},(_,i)=>Number(year)-5+i).map(v=>`<option value="${v}">${v}</option>`).join('');$('matrix-month').value=month;$('matrix-year').value=year;$('matrix-preview').classList.remove('hidden');document.querySelectorAll('#admin-dashboard > :not(#matrix-preview)').forEach(el=>el.classList.add('matrix-suppressed'));renderMatrixPreview()}
+function closeMatrixPreview(){$('matrix-preview').classList.add('hidden');document.querySelectorAll('#admin-dashboard > .matrix-suppressed').forEach(el=>el.classList.remove('matrix-suppressed'))}
+function renderMatrixPreview(){const month=$('matrix-month').value,year=Number($('matrix-year').value),monthName=new Date(year,Number(month)-1,1).toLocaleDateString('id-ID',{month:'long'}).toLocaleUpperCase('id-ID'),days=new Date(year,Number(month),0).getDate(),classSelect=$('matrix-class'),selected=classSelect.value;classSelect.innerHTML=`<option value="">Semua Kelas</option>${teacherClasses.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('')}`;classSelect.value=teacherClasses.includes(selected)?selected:'';$('matrix-title').textContent=`LAPORAN ABSENSI BULANAN - ${monthName} ${year}${classSelect.value?` - ${classSelect.value}`:''}`;$('matrix-head').innerHTML=`<tr><th>Nama</th><th>Kelas</th><th>Guru Penginput</th><th>Mapel</th>${Array.from({length:days},(_,i)=>`<th>${i+1}</th>`).join('')}</tr>`;const rows=attendanceRows().filter(r=>attendanceDateKey(r).startsWith(`${year}-${month}`)&&(!classSelect.value||r.class_name===classSelect.value)).sort((a,b)=>String(a.created_at||'').localeCompare(String(b.created_at||''))),users=new Map();rows.forEach(r=>{const id=String(r.student_number||r.student_name),teacherId=String(r.teacher_id||r.teacher_name||'guru'),key=JSON.stringify([r.class_name,teacherId,id,r.subject||'']);if(!users.has(key))users.set(key,{name:r.student_name||id,className:r.class_name||'-',teacher:r.teacher_name||r.input_by||teacherId,subject:subjectLabel(r.subject),days:{}});const day=Number(attendanceDateKey(r).slice(8,10)),value=/terlambat/i.test(String(r.display_name||''))?'T':r.status;users.get(key).days[day]=value});$('matrix-rows').innerHTML=users.size?[...users.values()].sort((a,b)=>a.name.localeCompare(b.name,'id')||a.teacher.localeCompare(b.teacher,'id')).map(u=>`<tr><td class="font-semibold">${esc(u.name)}</td><td>${esc(u.className)}</td><td>${esc(u.teacher)}</td><td>${esc(u.subject)}</td>${Array.from({length:days},(_,i)=>`<td>${esc(u.days[i+1]||'-')}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${days+4}" class="py-8 text-center text-slate-500">Belum ada data absensi tersimpan pada bulan ini.</td></tr>`}
+
+function printMatrixReport(){renderMatrixPreview();const title=$('matrix-title').textContent,head=$('matrix-head').innerHTML,body=$('matrix-rows').innerHTML,win=window.open('','_blank');if(!win){toast('Pratinjau cetak diblokir.',false);return}win.document.write(`<!doctype html><html lang="id"><head><meta charset="UTF-8"><title>${esc(title)}</title><style>body{font:12px Arial,sans-serif;margin:18px;color:#17324d}h1{text-align:center;font-size:16px}table{border-collapse:collapse;width:100%;font-size:9px}th,td{border:1px solid #9ca3af;padding:4px;text-align:center}th:nth-child(-n+2),td:nth-child(-n+2){text-align:left}</style></head><body><h1>${esc(title)}</h1><table><thead>${head}</thead><tbody>${body}</tbody></table><script>window.onload=()=>window.print()<\/script></body></html>`);win.document.close()}
+function printMonitoringReport(){const rows=adminRows(),bounds=getPeriodBounds(),counts=Object.fromEntries(Object.keys(labels).map(k=>[k,rows.filter(r=>r.status===k).length])),total=rows.length,percent=total?Math.round(counts.H/total*100):0,tableRows=rows.map(r=>`<tr><td>${esc(attendanceDateLabel(r))}</td><td>${esc(r.student_name)}</td><td>${esc(r.class_name||'—')}</td><td>${esc(subjectLabel(r.subject))}</td><td>${esc(`${r.status} · ${labels[r.status]||'—'}`)}</td><td>${esc(r.display_name||'—')}</td><td>${esc(r.input_by||'—')}</td></tr>`).join(''),win=window.open('','_blank');if(!win){toast('Pop-up diblokir. Izinkan pop-up untuk mencetak laporan.',false);return}win.document.write(`<!doctype html><html lang="id"><head><meta charset="UTF-8"><title>Laporan Monitoring Kehadiran</title><style>body{font-family:Arial,sans-serif;margin:28px;color:#17324d;font-size:12px}.kpi{display:inline-block;border:1px solid #ccc;padding:8px;margin:4px}table{width:100%;border-collapse:collapse;margin-top:16px}th,td{border:1px solid #bbb;padding:6px;text-align:left}th{background:#eef4f8}</style></head><body><h1>Laporan Monitoring Kehadiran</h1><p>${esc(bounds.label)} · ${esc($('a-level').value||'Semua jenjang')} · ${esc($('a-class').value||'Semua kelas')} · ${esc($('a-subject').value||'Semua mapel')}</p><div><span class="kpi">Total: ${total}</span><span class="kpi">Hadir: ${counts.H}</span><span class="kpi">Sakit: ${counts.S}</span><span class="kpi">Izin: ${counts.I}</span><span class="kpi">Alpa: ${counts.A}</span><span class="kpi">Dispensasi: ${counts.D}</span><span class="kpi">% Hadir: ${percent}%</span></div><table><thead><tr><th>Tanggal</th><th>Nama</th><th>Kelas</th><th>Mapel</th><th>Status</th><th>Keterangan</th><th>Input oleh</th></tr></thead><tbody>${tableRows||'<tr><td colspan="7">Tidak ada data.</td></tr>'}</tbody></table><script>window.onload=()=>window.print()<\/script></body></html>`);win.document.close()}
+
+function closeDownloadModal(){if(activeDownloadUrl){URL.revokeObjectURL(activeDownloadUrl);activeDownloadUrl=''}$('download-modal').classList.add('hidden')}
+function downloadCsv(filename,rows){const csvValue=value=>`"${String(value??'').replace(/"/g,'""')}"`,content='\uFEFF'+rows.map(row=>row.map(csvValue).join(',')).join('\r\n');if(activeDownloadUrl){URL.revokeObjectURL(activeDownloadUrl);activeDownloadUrl=''}activeDownloadUrl=URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=activeDownloadUrl;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();a.remove();$('download-modal-link').href=activeDownloadUrl;$('download-modal-link').download=filename;$('download-modal-message').textContent='Jika unduhan otomatis tidak berjalan, gunakan tombol di bawah.';$('download-modal').classList.remove('hidden')}
+function downloadMonitoringReport(){const rows=adminRows();downloadCsv(`laporan-monitoring-kehadiran-${isoToday()}.csv`,[['Tanggal','Nama Siswa','Kelas','Mapel','Status','Jam','Keterangan','Diinput Oleh'],...rows.map(r=>{const times=String(r.check_in_time||'|').split('|');return[attendanceDateLabel(r),r.student_name,r.class_name||'—',subjectLabel(r.subject),`${r.status} · ${labels[r.status]||'—'}`,times.filter(Boolean).join(' / ')||'—',r.display_name||'—',r.input_by||'—']})]);toast('Laporan CSV siap diunduh.')}
+function printTeacherAttendance(){renderTeacherAttendance();const win=window.open('','_blank');if(!win){toast('Pop-up diblokir.',false);return}const content=$('teacher-attendance-summary').innerHTML,table=$('teacher-attendance-list').closest('table').outerHTML;win.document.write(`<html lang="id"><head><meta charset="UTF-8"><title>Rekap Guru</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#17324d}.summary{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.summary article{border:1px solid #dce7f1;padding:12px;border-radius:8px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#eef4f8}</style></head><body><h1>Rekap Kehadiran Guru</h1><div class="summary">${content}</div>${table}<script>window.onload=()=>window.print()<\/script></body></html>`);win.document.close()}
+function downloadTeacherAttendance(){const rows=teacherAttendanceRows();downloadCsv(`rekapan-guru-${isoToday()}.csv`,[['Nama Guru','Tanggal','Jam Check-in','Jam Check-out','Durasi','Status'],...rows.map(r=>[r.name,r.date||'Tidak ada tanggal',r.in||'—',r.out||'—',r.duration,r.status])]);toast('Rekap guru siap diunduh.')}
+function exportCSV(){const rows=role==='Admin'?adminRows():attendanceRows().filter(r=>r.teacher_id===account?.id);if(!rows.length){toast('Tidak ada data untuk diekspor.',false);return}downloadCsv('rekap-absensi-sekolah.csv',[['attendance_date','student_number','student_name','class_name','subject','status','check_in_time','display_name','input_by'],...rows.map(r=>[attendanceDateKey(r),r.student_number,r.student_name,r.class_name,subjectLabel(r.subject),r.status,r.check_in_time||'',r.display_name||'',r.input_by||''])]);toast('File CSV berhasil disiapkan.')}
+
+async function start(){
+  if(busy)return;if(!canStartSession()){const wait=Math.max(1,Math.ceil((sessionBlockedUntil-Date.now())/1000));$('session-status').textContent=`Terlalu banyak percobaan. Coba lagi dalam ${wait} detik.`;return}
+  const attempt=++loginAttempt,username=$('username').value.trim(),password=$('password')?.value||'',teacherId=$('teacher-account').value,status=$('session-status'),button=$('login-btn'),retry=$('session-retry');
+  if(role==='Guru'&&!teacherId){status.textContent='Pilih akun guru terlebih dahulu.';toast('Pilih akun guru terlebih dahulu.',false);return}if(role==='Admin'&&!username){status.textContent='Nama pengguna admin wajib diisi.';toast('Nama pengguna admin wajib diisi.',false);return}if(!password){status.textContent='Kata sandi wajib diisi.';toast('Kata sandi wajib diisi.',false);return}
+  busy=true;button.disabled=true;button.textContent='Membuka sesi…';status.textContent='Membuka sesi…';retry.classList.add('hidden');
+  try{const result=await authAdapter.login({role,username,password,teacherId});if(attempt!==loginAttempt)return;if(!result?.isOk||!result.user)throw Object.assign(new Error(result?.error?.message||'Login gagal.'),{kind:result?.error?.kind||'auth'});account=result.user;session=result.session||{id:newSessionId(account.id),role};attendanceSession={teacherId:account.id,recordId:'',checkInTime:'',checkOutTime:'',dirty:false};if(!await loadMasterData())throw Error('Master data gagal dimuat. Coba login kembali.');const loaded=await dataGateway.init(handler);if(!loaded?.isOk)throw Error('Data absensi gagal dimuat.');dataReady=true;registerSessionSuccess();auditEvent('login');status.textContent='';openApp()}
+  catch(error){registerSessionFailure();status.textContent=error?.kind==='auth'?(error.message||'Login gagal.'):'Sesi tidak dapat dibuka. Silakan coba lagi.';retry.classList.remove('hidden');toast(status.textContent,false)}
+  finally{busy=false;button.disabled=false;button.textContent='Masuk ke Aplikasi'}
+}
+function openApp(){if(!account)return;$('login').classList.add('hidden');$('app').classList.remove('hidden');$('side-name').textContent=account.name;$('side-role').textContent=`Akses ${role}`;$('header-name').textContent=role==='Guru'?`${account.id} · ${account.subject||''}`:account.name;$('role-badge').textContent=role;$('header-date').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});show(role==='Guru'?'guru-dashboard':'admin-dashboard')}
+async function logout(){if(busy)return;busy=true;try{await authAdapter.logout()}catch(error){}finally{auditEvent('logout');session=null;account=null;attendanceSession={teacherId:'',recordId:'',checkInTime:'',checkOutTime:'',dirty:false};attendanceDrafts.clear();saveStates.clear();teacherUserRows=[];teacherUsersLoaded=false;teacherUsersLoading=false;bulkUserCredentials=[];$('app').classList.add('hidden');$('login').classList.remove('hidden');$('password')&&($('password').value='');busy=false;toast('Anda telah keluar dari aplikasi.')}}
+
+const handler={onDataChanged(data){records=safeArray(data).filter(item=>item&&typeof item==='object');if(role==='Guru'&&account&&!attendanceSession.dirty)syncTeacherSessionFromStored();if(!$('app').classList.contains('hidden'))renderActive()}};
+
+async function init(){
+  await loadMasterData();
+  $('teacher-account').innerHTML='<option value="">Pilih akun guru</option>'+teachers.map(t=>`<option value="${esc(t.id)}">${esc(t.id)} — ${esc(t.name)}</option>`).join('');
+  setSelectOptions($('g-class'),teacherClasses,'Pilih kelas');if(teacherClasses[0])$('g-class').value=teacherClasses[0];$('g-date').value=isoToday();
+  $('a-month').innerHTML='<option value="">Bulan berjalan</option>'+Array.from({length:12},(_,i)=>{const value=String(i+1).padStart(2,'0');return `<option value="${value}">${new Date(2026,i,1).toLocaleDateString('id-ID',{month:'long'})}</option>`}).join('');$('a-month').value=String(new Date().getMonth()+1).padStart(2,'0');
+  const currentYear=new Date().getFullYear();$('a-year').innerHTML=Array.from({length:11},(_,i)=>currentYear-5+i).map(y=>`<option value="${y}">${y}</option>`).join('');$('a-year').value=String(currentYear);
+  setSelectOptions($('a-level'),['SD','SMP','MA'],'Pilih Jenjang');populateClassSelect('a-class','', 'Pilih Kelas');setSelectOptions($('student-level'),['SD','SMP','MA'],'Pilih Jenjang');populateClassSelect('student-class','', 'Pilih Kelas');
+  $('teacher-week').value=isoToday();$('teacher-month').value=isoToday().slice(0,7);$('journal-date').value=isoToday();
+
+  document.querySelectorAll('.role').forEach(button=>button.addEventListener('click',()=>{role=button.dataset.role;document.querySelectorAll('.role').forEach(item=>{const active=item===button;item.classList.toggle('border-blue-600',active);item.classList.toggle('bg-blue-50',active);item.setAttribute('aria-pressed',String(active))});$('teacher-select-wrap').classList.toggle('hidden',role!=='Guru')}));
+  $('teacher-account').addEventListener('change',()=>{const t=teachers.find(x=>x.id===$('teacher-account').value);if(role==='Guru'&&t)$('username').value=t.id});
+  $('login-btn').addEventListener('click',start);$('session-retry').addEventListener('click',start);$('logout').addEventListener('click',logout);$('menu-btn').addEventListener('click',()=>$('sidebar').classList.toggle('open'));$('menu').addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled)show(b.dataset.page)});
+  $('g-subject').addEventListener('change',renderGuru);$('g-class').addEventListener('change',renderGuru);$('g-date').addEventListener('change',renderGuru);
+  $('guru-rows').addEventListener('click',e=>{const b=e.target.closest('[data-student]');if(!b||b.disabled||busy||!$('g-subject').value)return;const student=students.find(s=>s.id===b.dataset.student),date=$('g-date').value,className=$('g-class').value;if(!student)return;const draft=ensureDraft(student,date,className);draft.status=b.dataset.status;renderGuru()});
+  $('guru-rows').addEventListener('input',e=>{const input=e.target.closest('[data-note]');if(!input||input.disabled||busy||!$('g-subject').value)return;const student=students.find(s=>s.id===input.dataset.note),date=$('g-date').value,className=$('g-class').value;if(student)ensureDraft(student,date,className).note=input.value});
+  let confirmAll=false;$('all-present').addEventListener('click',()=>{if(busy||!$('g-subject').value)return;if(!confirmAll){confirmAll=true;$('all-present').textContent='Klik lagi untuk konfirmasi';setTimeout(()=>{confirmAll=false;$('all-present').textContent='Tandai semua Hadir'},3500);return}const date=$('g-date').value,className=$('g-class').value;students.filter(s=>s.className===className).forEach(s=>{ensureDraft(s,date,className).status='H'});confirmAll=false;$('all-present').textContent='Tandai semua Hadir';renderGuru()});
+  $('save-class').addEventListener('click',saveAttendance);$('teacher-in-time').addEventListener('input',e=>{attendanceSession.checkInTime=e.target.value;attendanceSession.dirty=true});$('teacher-out-time').addEventListener('input',e=>{attendanceSession.checkOutTime=e.target.value;attendanceSession.dirty=true});$('save-teacher-time').addEventListener('click',saveTeacherTime);
+
+  $('journal-form').addEventListener('submit',saveJournal);$('journal-list').addEventListener('click',e=>{const edit=e.target.closest('.edit-journal'),del=e.target.closest('.delete-journal');if(edit)editJournal(edit.dataset.id);if(del)deleteJournal(del.dataset.id)});$('cancel-journal-edit').addEventListener('click',resetJournalForm);$('print-journal').addEventListener('click',printJournal);['journal-search','journal-from','journal-to'].forEach(id=>$(id).addEventListener(id==='journal-search'?'input':'change',renderJournal));['journal-start','journal-end'].forEach(id=>$(id).addEventListener('change',()=>{$('journal-duration').value=journalDuration($('journal-start').value,$('journal-end').value)}));
+
+  ['a-period','a-month','a-year','a-semester','a-subject'].forEach(id=>$(id).addEventListener('change',renderAdmin));$('a-level').addEventListener('change',()=>{populateClassSelect('a-class',$('a-level').value,'Pilih Kelas');renderAdmin()});$('a-class').addEventListener('change',renderAdmin);$('reset-admin-filters').addEventListener('click',()=>{$('a-subject').value='';$('a-period').value='weekly';$('a-month').value=String(new Date().getMonth()+1).padStart(2,'0');$('a-year').value=String(new Date().getFullYear());$('a-semester').value='1';$('a-level').value='';populateClassSelect('a-class','', 'Pilih Kelas');renderAdmin()});
+  $('print-report').addEventListener('click',printMonitoringReport);$('matrix-report').addEventListener('click',openMatrixPreview);$('matrix-back').addEventListener('click',closeMatrixPreview);['matrix-month','matrix-year','matrix-class'].forEach(id=>$(id).addEventListener('change',renderMatrixPreview));$('matrix-print').addEventListener('click',printMatrixReport);$('download-monitoring-report').addEventListener('click',downloadMonitoringReport);
+  $('print-teacher-attendance').addEventListener('click',printTeacherAttendance);$('download-teacher-attendance').addEventListener('click',downloadTeacherAttendance);$('teacher-attendance-search').addEventListener('input',renderTeacherAttendance);$('teacher-period').addEventListener('change',()=>{$('teacher-week-wrap').classList.toggle('hidden',$('teacher-period').value!=='weekly');$('teacher-month-wrap').classList.toggle('hidden',$('teacher-period').value!=='monthly');$('teacher-semester-wrap').classList.toggle('hidden',$('teacher-period').value!=='semester')});$('show-teacher-summary').addEventListener('click',renderTeacherAttendance);$('print-teacher-summary').addEventListener('click',printTeacherAttendance);
+  $('export-csv').addEventListener('click',exportCSV);$('close-download-modal').addEventListener('click',closeDownloadModal);$('download-modal').addEventListener('click',e=>{if(e.target===$('download-modal'))closeDownloadModal()});
+  $('refresh-teacher-users').addEventListener('click',()=>{teacherUsersLoaded=false;loadTeacherUserAccounts(true)});$('bulk-create-teacher-users').addEventListener('click',bulkCreateTeacherUsers);$('teacher-user-list').addEventListener('click',e=>{const edit=e.target.closest('.teacher-user-edit'),toggle=e.target.closest('.teacher-user-toggle');if(edit)openTeacherUserModal(edit.dataset.id);if(toggle)toggleTeacherUser(toggle.dataset.id,toggle.dataset.active==='1')});$('teacher-user-form').addEventListener('submit',saveTeacherUserFromAdmin);$('generate-teacher-password').addEventListener('click',()=>{$('teacher-user-password').value=randomTeacherPassword()});$('close-teacher-user-modal').addEventListener('click',closeTeacherUserModal);$('cancel-teacher-user-modal').addEventListener('click',closeTeacherUserModal);$('teacher-user-modal').addEventListener('click',e=>{if(e.target===$('teacher-user-modal'))closeTeacherUserModal()});$('download-bulk-users').addEventListener('click',downloadBulkUserCredentials);$('close-bulk-user-modal').addEventListener('click',closeBulkUserModal);$('close-bulk-user-modal-x').addEventListener('click',closeBulkUserModal);$('bulk-user-modal').addEventListener('click',e=>{if(e.target===$('bulk-user-modal'))closeBulkUserModal()});
+  $('reset-all-data').addEventListener('click',openResetAll);$('cancel-reset-all').addEventListener('click',closeResetAll);$('reset-all-form').addEventListener('submit',resetAllData);$('reset-all-confirm').addEventListener('input',e=>{$('confirm-reset-all').disabled=e.target.value!=='HAPUS SEMUA DATA'||busy});$('reset-all-modal').addEventListener('click',e=>{if(e.target===$('reset-all-modal'))closeResetAll()});
+  $('student-search').addEventListener('input',()=>{pages.students=1;renderStudents()});$('student-level').addEventListener('change',()=>{pages.students=1;populateClassSelect('student-class',$('student-level').value,'Pilih Kelas');renderStudents()});$('student-class').addEventListener('change',()=>{pages.students=1;renderStudents()});$('teacher-search').addEventListener('input',()=>{pages.teachers=1;renderTeachers()});['history-search','history-status','history-date'].forEach(id=>$(id).addEventListener(id==='history-search'?'input':'change',()=>{pages.history=1;renderHistory()}));$('history-list').addEventListener('click',e=>{const edit=e.target.closest('.edit'),del=e.target.closest('.delete');if(edit)openEdit(edit.dataset.id);if(del)deleteRecord(del.dataset.id)});$('close-edit').addEventListener('click',closeEdit);$('cancel-edit').addEventListener('click',closeEdit);$('edit-form').addEventListener('submit',saveEdit);$('edit-modal').addEventListener('click',e=>{if(e.target===$('edit-modal'))closeEdit()});$('retry-btn').addEventListener('click',()=>show(lastFeature||(role==='Guru'?'guru-dashboard':'admin-dashboard')));document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('edit-modal').classList.contains('hidden'))closeEdit();if(!$('download-modal').classList.contains('hidden'))closeDownloadModal();if(!$('teacher-user-modal').classList.contains('hidden'))closeTeacherUserModal();if(!$('bulk-user-modal').classList.contains('hidden'))closeBulkUserModal()}});
+
+  try{const result=await dataGateway.init(handler);dataReady=Boolean(result?.isOk);if(Array.isArray(result?.data))handler.onDataChanged(result.data);if(!dataReady)toast('Layanan data belum terhubung. Aplikasi dapat dibuka, tetapi penyimpanan belum aktif.',false)}catch(error){dataReady=false;toast('Layanan data gagal diinisialisasi. Fitur baca tampilan tetap tersedia.',false)}
+  lucide.createIcons();
+  const me=await window.absensiBackend.auth.me();
+  if(me?.isOk){role=me.session.role;account=me.user;session=me.session;if(await loadMasterData()){await dataGateway.init(handler);openApp();}}
+  setInterval(refreshFromServer,30000);
+}
+let refreshing=false;
+async function refreshFromServer(){
+  if(refreshing||!account||busy||document.hidden||attendanceDrafts.size||attendanceSession.dirty||editingJournalId||activeEdit||document.querySelector('.modal:not(.hidden)')||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;
+  refreshing=true;try{await loadMasterData();await window.absensiBackend.data.refresh();teacherUsersLoaded=false;}finally{refreshing=false;}
+}
+window.addEventListener('focus',refreshFromServer);
+window.addEventListener('absensi-session-expired',()=>{session=null;account=null;records=[];students=[];attendanceDrafts.clear();saveStates.clear();document.querySelectorAll('.modal').forEach(x=>x.classList.add('hidden'));$('app').classList.add('hidden');$('login').classList.remove('hidden');$('session-status').textContent='Sesi berakhir atau password telah direset. Silakan login kembali.';});
+document.addEventListener('DOMContentLoaded',init);
+  </script>
+ 
+</body></html>

@@ -1,0 +1,18 @@
+{
+  "name": "sekolah-absenku",
+  "version": "1.3.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test tests/regression.mjs tests/frontend.mjs tests/subjects.mjs tests/academic.mjs",
+    "test:serve": "node tests/local-server.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

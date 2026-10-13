@@ -1,0 +1,6 @@
+PANDUAN PEMBARUAN VERSI 1.3.0
+
+Ikuti PANDUAN_PEMBARUAN.md berdasarkan skema database saat ini.
+Migrasi 0004, 0005, dan 0006 diperlukan; jangan menjalankan ulang migrasi 0003/0005/0006 yang sudah diterapkan.
+Cadangkan database dahulu. Jangan gunakan Reset Seluruh Data.
+Paket belum diterapkan ke aplikasi online.

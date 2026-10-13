@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sekolah-absenku",
+  "compatibility_date": "2026-09-25",
+  "main": "src/index.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/setup-admin", "/manage-users"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sekolah-absenku-db",
+      "database_id": "984514ac-e02f-4d89-9fd5-a541038504a2"
+    }
+  ]
+}
